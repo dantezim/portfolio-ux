@@ -1,0 +1,10 @@
+{
+  "description": "Showcases a polished personal portfolio with clear CTAs and responsive design, enhancing user engagement across all devices for professionals.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
