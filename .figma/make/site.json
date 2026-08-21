@@ -1,7 +1,9 @@
 {
-  "description": "Showcases a polished personal portfolio with clear CTAs and responsive design, enhancing user engagement across all devices for professionals.",
+  "title": "Pedro Armada — Product & UX Designer",
+  "description": "Product Designer focado em soluções que agregam ao negócio e melhoram a experiência do usuário, orientado a dados.",
+  "language": "pt-BR",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
