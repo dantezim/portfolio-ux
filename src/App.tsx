@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Download } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Download, ArrowUp } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
 import SplashScreen from "./SplashScreen";
+import Timeline from "./Timeline";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
 const BEHANCE_URL = "https://www.behance.net/pedroharmada";
@@ -10,6 +11,7 @@ const EMAIL_URL = "mailto:ph.armada.nalis@gmail.com";
 
 const NAV_LINKS = [
   { label: "Sobre", href: "#sobre" },
+  { label: "Experiência", href: "#experiencia" },
   { label: "Projetos", href: "#projetos" },
   { label: "Contato", href: "#contato" },
 ];
@@ -19,19 +21,19 @@ const SKILLS = ["UX Design", "UI Design", "UX Research", "Chatbots", "Design Sys
 
 const PROJECTS = [
   {
-    title: "Redesign do Skoob",
+    title: "Redesign do Skoob (Em construção 🚧)",
     description: "Projeto de pesquisa com o objetivo de criar uma nova feature de comunidades de leitura e aumentar a retenção de usuários no Skoob.",
     tags: ["UX Research", "UX Design", "Personas"],
     color: "from-[#5b68f5] to-[#2b49aa]",
   },
   {
-    title: "Farmácias Forbi - Jornada de Atendimento",
+    title: "Farmácias Forbi - Jornada de Atendimento (Em construção 🚧)",
     description: "Fluxo conversacional para uma grande rede de farmácias, cujo objetivo era automatizar a jornada dos clientes e reduzir o TMA.",
     tags: ["UX Design", "Chatbots", "Design Conversacional"],
     color: "from-[#6822c9] to-[#2b49aa]",
   },
   {
-    title: "Agente de IA",
+    title: "Agente de IA (Em construção 🚧)",
     description: "Criação de um agente de IA focado em apoiar novos colaboradores no processo de Onboarding de uma empresa.",
     tags: ["IA Generativa", "UX Design", "Documentação"],
     color: "from-[#2b49aa] to-[#151e87]",
@@ -155,7 +157,7 @@ function HeroSection() {
               Ver meus projetos
             </a>
             <a
-              href={EMAIL_URL}
+              href="#contato"
               className="border-2 border-[#5b68f5] text-[#2b49aa] font-bold px-8 py-3.5 rounded-2xl hover:bg-[#5b68f5]/5 transition-all text-[15px]"
             >
               Vamos conversar
@@ -225,7 +227,7 @@ function ProjectsSection() {
             </h2>
           </div>
           <a
-            href={EMAIL_URL}
+            href="#contato"
             className="text-[#2b49aa] font-semibold text-sm underline underline-offset-4 hover:text-[#151e87] transition-colors whitespace-nowrap"
           >
             Tem um projeto em mente? →
@@ -322,7 +324,7 @@ function AboutSection() {
           <div className="space-y-5">
             {[
               ["2+", "anos de experiência em UX/UI Design"],
-              ["5+", "projetos entregues com impacto mensurável"],
+              ["3+", "projetos entregues com impacto mensurável"],
               ["3", "empresas em setores distintos"],
               ["100%", "orientado a dados e ao usuário"],
             ].map(([val, desc]) => (
@@ -387,7 +389,7 @@ function Footer() {
         {/* Center: Copyright */}
         <div className="text-center">
           <p className="text-[#909797] text-sm">
-            © 2026 Pedro Armada. Todos os direitos reservados.
+            © 2026 Pedro Armada.
           </p>
         </div>
 
@@ -440,9 +442,29 @@ function BehanceIcon({ className = "" }: { className?: string }) {
 
 export default function App() {
   const [splashKey, setSplashKey] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const handleReplayIntro = () => {
     setSplashKey((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -452,19 +474,26 @@ export default function App() {
       <main>
         <HeroSection />
         <ProjectsSection />
+        <Timeline />
         <AboutSection />
         <ContactSection />
       </main>
       <Footer />
 
-      {/* Floating replay button for easy testing in preview */}
-      <div className="fixed bottom-5 right-5 z-40">
+      {/* Floating Back to Top Button */}
+      <div
+        className={`fixed bottom-6 right-6 z-40 transition-all duration-300 ${
+          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
         <button
-          onClick={handleReplayIntro}
-          className="flex items-center gap-2 bg-[#151e87]/90 hover:bg-[#151e87] text-white text-xs font-semibold px-3.5 py-2 rounded-full shadow-lg backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
-          title="Ver animação de abertura novamente"
+          onClick={scrollToTop}
+          className="flex items-center gap-2 bg-[#151e87]/90 hover:bg-[#151e87] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          title="Voltar ao topo da página"
+          aria-label="Voltar ao topo"
         >
-          <span className="text-sm">↺</span> Ver Intro
+          <ArrowUp size={15} />
+          <span>Voltar ao topo</span>
         </button>
       </div>
     </div>
