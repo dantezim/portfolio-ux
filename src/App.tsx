@@ -204,7 +204,7 @@ function ProfileCard() {
       </div>
 
       <div className="border-t border-white/10 mt-4 pt-4 grid grid-cols-3 gap-2 text-center">
-        {[["2+", "Anos exp."], ["5+", "Projetos"], ["3", "Empresas"]].map(([val, lab]) => (
+        {[["2+", "Anos exp."], ["3+", "Projetos"], ["3", "Empresas"]].map(([val, lab]) => (
           <div key={lab}>
             <p className="text-white font-bold text-lg leading-tight">{val}</p>
             <p className="text-white/50 text-xs">{lab}</p>
