@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Download, ArrowUp } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
+import imgSkoob from "./assets/skoob-cover.png";
 import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
 
@@ -21,22 +22,26 @@ const SKILLS = ["UX Design", "UI Design", "UX Research", "Chatbots", "Design Sys
 
 const PROJECTS = [
   {
-    title: "Redesign do Skoob (Em construção 🚧)",
-    description: "Projeto de pesquisa com o objetivo de criar uma nova feature de comunidades de leitura e aumentar a retenção de usuários no Skoob.",
-    tags: ["UX Research", "UX Design", "Personas"],
+    title: "Redesign do Skoob",
+    description: "Pesquisa de UX com o objetivo de entender o comportamento dos leitores e desenhar a nova funcionalidade de comunidades de leitura no Skoob.",
+    tags: ["UX Research", "UX Design", "Comunidades"],
     color: "from-[#5b68f5] to-[#2b49aa]",
+    image: imgSkoob,
+    link: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
   },
   {
     title: "Farmácias Forbi - Jornada de Atendimento (Em construção 🚧)",
     description: "Fluxo conversacional para uma grande rede de farmácias, cujo objetivo era automatizar a jornada dos clientes e reduzir o TMA.",
     tags: ["UX Design", "Chatbots", "Design Conversacional"],
     color: "from-[#6822c9] to-[#2b49aa]",
+    link: BEHANCE_URL,
   },
   {
     title: "Agente de IA (Em construção 🚧)",
     description: "Criação de um agente de IA focado em apoiar novos colaboradores no processo de Onboarding de uma empresa.",
     tags: ["IA Generativa", "UX Design", "Documentação"],
     color: "from-[#2b49aa] to-[#151e87]",
+    link: BEHANCE_URL,
   },
 ];
 
@@ -235,31 +240,65 @@ function ProjectsSection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS.map((p) => (
-            <article key={p.title} className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className={`h-40 bg-gradient-to-br ${p.color} flex items-end p-5`}>
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span key={t} className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full border border-white/30">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug">{p.title}</h3>
-                <p className="text-[#494a4c] text-sm leading-relaxed mb-5">{p.description}</p>
+          {PROJECTS.map((p) => {
+            const targetLink = p.link || BEHANCE_URL;
+            return (
+              <article
+                key={p.title}
+                className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+              >
                 <a
-                  href={BEHANCE_URL}
+                  href={targetLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all"
+                  className="block relative h-48 overflow-hidden bg-gray-100"
                 >
-                  Ver case study <span className="text-base">→</span>
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${p.color}`} />
+                  )}
+                  <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="bg-black/50 backdrop-blur-md text-white text-xs font-medium px-2.5 py-1 rounded-full border border-white/20"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </a>
-              </div>
-            </article>
-          ))}
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug">
+                      <a
+                        href={targetLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#5b68f5] transition-colors"
+                      >
+                        {p.title}
+                      </a>
+                    </h3>
+                    <p className="text-[#494a4c] text-sm leading-relaxed mb-5">{p.description}</p>
+                  </div>
+                  <a
+                    href={targetLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto"
+                  >
+                    Ver case study <span className="text-base">→</span>
+                  </a>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="text-center mt-10">
