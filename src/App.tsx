@@ -48,14 +48,21 @@ const PROJECTS = [
 function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
   const [open, setOpen] = useState(false);
 
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (onReplayIntro) {
+      onReplayIntro();
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 shadow-[0_4px_20px_rgba(0,0,0,0.25)]" style={{ background: "linear-gradient(95deg,#5b68f5 0%,#2b49aa 45%,#151e87 100%)" }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-16 h-20 flex items-center justify-between gap-6">
         {/* Left: Logo and Nav Links grouped together */}
         <div className="flex items-center gap-10 lg:gap-14">
           <button
-            onClick={onReplayIntro}
-            title="Clique para ver a intro novamente"
+            onClick={handleLogoClick}
+            title="Voltar ao início do site"
             className="text-white text-2xl font-black tracking-[-0.04em] shrink-0 font-['Inter',sans-serif] hover:opacity-90 transition-opacity text-left cursor-pointer"
           >
             PEDRO <em className="not-italic italic font-black">ARMADA</em>
@@ -420,9 +427,13 @@ function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-4">
         {/* Left: Logo */}
         <div className="flex items-center justify-center md:justify-start">
-          <span className="text-[#1c1b1b] font-black text-xl tracking-[-0.04em] font-['Inter',sans-serif]">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            title="Voltar ao início do site"
+            className="text-[#1c1b1b] font-black text-xl tracking-[-0.04em] font-['Inter',sans-serif] hover:opacity-80 transition-opacity cursor-pointer text-left"
+          >
             PEDRO <em className="not-italic italic">ARMADA</em>
-          </span>
+          </button>
         </div>
 
         {/* Center: Copyright */}
