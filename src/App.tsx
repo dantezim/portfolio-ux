@@ -396,24 +396,18 @@ function ContactSection() {
           <span className="text-[#6822c9]">Vamos conversar!</span>
         </h2>
         <p className="text-[#494a4c] text-lg mb-10 leading-relaxed">
-          Estou disponível para projetos freelance, colaborações e oportunidades full-time.
-          <p>Me mande uma mensagem para nos conhecermos melhor!</p>
+          Estou disponível para projetos freelance, colaborações e oportunidades full-time.<br />
+          Me mande uma mensagem para nos conhecermos melhor!
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href={EMAIL_URL}
-            className="brand-gradient text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-base"
-          >
-            Enviar mensagem
-          </a>
+        <div className="flex justify-center">
           <a
             href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border-2 border-[#5b68f5] text-[#2b49aa] font-bold px-10 py-4 rounded-2xl hover:bg-[#5b68f5]/5 transition-all text-base"
+            className="brand-gradient inline-flex items-center justify-center gap-3 text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-base"
           >
-            <LinkedInIcon />
-            LinkedIn
+            <LinkedInIcon className="w-5 h-5 text-white" />
+            Me mande uma mensagem
           </a>
         </div>
       </div>
