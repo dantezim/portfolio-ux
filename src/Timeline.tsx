@@ -1,133 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { Briefcase, Calendar, Building2, Sparkles, CheckCircle2 } from "lucide-react";
+import { TRANSLATIONS, type Language } from "./i18n/translations";
 
-interface TimelineItem {
-  id: string;
-  company: string;
-  role: string;
-  period: string;
-  badge?: string;
-  isCurrent?: boolean;
-  description: string[];
-  tags: string[];
+interface TimelineProps {
+  lang: Language;
 }
 
-const EXPERIENCES: TimelineItem[] = [
-  {
-    id: "zenvia",
-    company: "Zenvia Mobile Services",
-    role: "UX Designer Pleno",
-    period: "2025 – 2026",
-    badge: "Seguros & IA Generativa",
-    isCurrent: true,
-    description: [
-      "Atuação na evolução de produtos digitais e jornadas conversacionais, em parceria com equipes de Produto, Design e Tecnologia para uma grande empresa do segmento de Seguros.",
-      "Definição e acompanhamento de métricas de produto e experiência, utilizando dados de comportamento para orientar decisões e evoluções de jornadas digitais.",
-      "Estruturação de dashboards que apoiaram decisões de evolução do produto e monitoramento contínuo da experiência do usuário.",
-      "Condução de análises de comportamento do usuário para identificar oportunidades de melhoria e apoiar decisões de evolução do produto.",
-      "Contribuição na concepção de agentes de IA, definindo fluxos, regras de decisão e estratégias de interação apoiadas por IA Generativa.",
-      "Articulação com múltiplos stakeholders para definição de soluções digitais alinhadas aos objetivos de negócio.",
-      "Atuação em iniciativas de inovação utilizando Design Thinking, metodologias ágeis (Scrum) e ferramentas colaborativas para construção de soluções escaláveis.",
-    ],
-    tags: [
-      "Product Design",
-      "UX Research",
-      "Product Metrics",
-      "Dashboards",
-      "IA Generativa",
-      "Agentes de IA",
-      "Design Conversacional",
-      "Scrum",
-    ],
-  },
-  {
-    id: "resolv-jr",
-    company: "Resolv Tecnologia e Inovação LTDA",
-    role: "UX/UI Designer Junior",
-    period: "2024 – 2025",
-    badge: "Saúde & Educação B2B",
-    description: [
-      "Atuação na evolução contínua de produtos digitais escaláveis utilizados por clientes corporativos de diferentes segmentos, como saúde e educação, lado a lado com os stakeholders.",
-      "Desenvolvimento de interfaces de alta fidelidade.",
-      "Estruturação de jornadas digitais, aplicando UX Writing para aumentar a clareza das interações e reduzir ambiguidades na experiência.",
-      "Definição de fluxos de usuário.",
-      "Contribuição na concepção de testes de usabilidade para identificar problemas de uso e gerar insights para evolução do produto.",
-      "Análise de comportamento para direcionamento de melhorias.",
-      "Colaboração ativa entre Produto, Design e Desenvolvimento.",
-    ],
-    tags: [
-      "UX/UI Design",
-      "UX Writing",
-      "High-Fidelity UI",
-      "User Flows",
-      "Testes de Usabilidade",
-      "B2B Corporativo",
-    ],
-  },
-  {
-    id: "amigu",
-    company: "Instituto Amigu",
-    role: "UX/UI Designer Junior",
-    period: "2025",
-    badge: "Plataforma SouAmiGU",
-    description: [
-      "Participação no desenvolvimento da plataforma SouAmiGU, voltada para organização e inscrição de hackathons.",
-      "Estruturação do fluxo de negócio, definição de regras de funcionamento, fluxos de usuário e jornadas digitais.",
-      "Desenvolvimento de protótipos de alta fidelidade utilizando Figma e colaboração na definição da experiência do usuário e arquitetura funcional da plataforma.",
-    ],
-    tags: [
-      "UX/UI Design",
-      "Figma",
-      "Prototipagem",
-      "User Flows",
-      "Arquitetura Funcional",
-      "Design System",
-    ],
-  },
-  {
-    id: "portohack",
-    company: "PortoHack 2023",
-    role: "Mentor de UX & Tecnologia",
-    period: "2023",
-    badge: "Setor Portuário",
-    description: [
-      "Atuação como mentor em hackathon focado em desafios do setor portuário, apoiando participantes na resolução de problemas e definição de soluções digitais.",
-      "Orientação em estruturação de ideias, tecnologia e experiência do usuário, com colaboração em dinâmicas multidisciplinares de inovação e desenvolvimento ágil.",
-    ],
-    tags: [
-      "Mentoria",
-      "Hackathon",
-      "Design Thinking",
-      "Inovação Aberta",
-      "Desenvolvimento Ágil",
-    ],
-  },
-  {
-    id: "resolv-dev",
-    company: "Resolv Tecnologia e Inovação LTDA",
-    role: "Assistente de Desenvolvimento",
-    period: "2023 – 2024",
-    badge: "Chatbots & Low-code",
-    description: [
-      "Apoio no desenvolvimento e manutenção de chatbots utilizando plataformas low-code/no-code.",
-      "Participação na estruturação de melhorias e automações em soluções conversacionais.",
-      "Colaboração com equipes técnicas e de produto em iniciativas de experiência do usuário.",
-      "Suporte na implementação e evolução de fluxos digitais.",
-    ],
-    tags: [
-      "Chatbots",
-      "Low-code / No-code",
-      "Zenvia NLU",
-      "IBM Watson",
-      "Automação",
-      "UX Conversacional",
-    ],
-  },
-];
-
-export default function Timeline() {
+export default function Timeline({ lang }: TimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [lineHeightPercent, setLineHeightPercent] = useState(0);
+
+  const t = TRANSLATIONS[lang].timeline;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -162,13 +45,13 @@ export default function Timeline() {
         <div className="mb-16 text-left max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#a4b1ff] text-xs font-semibold tracking-widest uppercase mb-4">
             <Briefcase size={14} className="text-[#5b68f5]" />
-            Experiência Profissional
+            {t.badge}
           </div>
           <h2 className="font-['IBM_Plex_Mono',monospace] font-bold text-4xl lg:text-5xl xl:text-6xl tracking-[0.02em] text-white mb-6 leading-tight">
-            Trajetória &amp; <span className="text-[#6822c9]">Impacto</span>
+            {t.titlePrefix}<span className="text-[#6822c9]">{t.titleHighlight}</span>
           </h2>
           <p className="text-[#a4adae] text-lg leading-relaxed">
-            Histórico de atuação profissional focado em criar experiências centradas no usuário e orientadas por dados, atuando entre UX, Produto e Tecnologia.
+            {t.subtitle}
           </p>
         </div>
 
@@ -184,7 +67,7 @@ export default function Timeline() {
 
           {/* Timeline Items */}
           <div className="space-y-12 md:space-y-16">
-            {EXPERIENCES.map((exp) => (
+            {t.experiences.map((exp) => (
               <div key={exp.id} className="relative pl-12 md:pl-20 group">
                 {/* Timeline Dot */}
                 <div className="absolute left-4 md:left-8 top-1.5 -translate-x-1/2 flex items-center justify-center">
@@ -211,7 +94,7 @@ export default function Timeline() {
                         {exp.isCurrent && (
                           <span className="inline-flex items-center gap-1.5 bg-[#129649]/20 border border-[#129649]/40 text-[#6fe399] text-xs font-medium px-2.5 py-0.5 rounded-full">
                             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                            Atual
+                            {lang === "pt" ? "Atual" : "Current"}
                           </span>
                         )}
                       </div>

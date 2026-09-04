@@ -4,49 +4,32 @@ import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d
 import imgSkoob from "./assets/skoob-cover.png";
 import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { TRANSLATIONS, type Language } from "./i18n/translations";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
 const BEHANCE_URL = "https://www.behance.net/pedroharmada";
 const RESUME_URL = "/curriculo-pedro-armada.pdf";
-const EMAIL_URL = "mailto:ph.armada.nalis@gmail.com";
 
-const NAV_LINKS = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Experiência", href: "#experiencia" },
-  { label: "Projetos", href: "#projetos" },
-  { label: "Contato", href: "#contato" },
-];
+interface SectionProps {
+  lang: Language;
+}
 
+interface HeaderProps extends SectionProps {
+  onLanguageChange: (lang: Language) => void;
+  onReplayIntro?: () => void;
+}
 
-const SKILLS = ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"];
-
-const PROJECTS = [
-  {
-    title: "Redesign do Skoob",
-    description: "Pesquisa de UX com o objetivo de entender o comportamento dos leitores e desenhar a nova funcionalidade de comunidades de leitura no Skoob.",
-    tags: ["UX Research", "UX Design", "Comunidades"],
-    color: "from-[#5b68f5] to-[#2b49aa]",
-    image: imgSkoob,
-    link: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
-  },
-  {
-    title: "Farmácias Forbi - Jornada de Atendimento (Em construção 🚧)",
-    description: "Fluxo conversacional para uma grande rede de farmácias, cujo objetivo era automatizar a jornada dos clientes e reduzir o TMA.",
-    tags: ["UX Design", "Chatbots", "Design Conversacional"],
-    color: "from-[#6822c9] to-[#2b49aa]",
-    link: BEHANCE_URL,
-  },
-  {
-    title: "Agente de IA (Em construção 🚧)",
-    description: "Criação de um agente de IA focado em apoiar novos colaboradores no processo de Onboarding de uma empresa.",
-    tags: ["IA Generativa", "UX Design", "Documentação"],
-    color: "from-[#2b49aa] to-[#151e87]",
-    link: BEHANCE_URL,
-  },
-];
-
-function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
+function Header({ lang, onLanguageChange, onReplayIntro }: HeaderProps) {
   const [open, setOpen] = useState(false);
+  const tNav = TRANSLATIONS[lang].nav;
+
+  const navLinks = [
+    { label: tNav.about, href: "#sobre" },
+    { label: tNav.experience, href: "#experiencia" },
+    { label: tNav.projects, href: "#projetos" },
+    { label: tNav.contact, href: "#contato" },
+  ];
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,13 +39,16 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 shadow-[0_4px_20px_rgba(0,0,0,0.25)]" style={{ background: "linear-gradient(95deg,#5b68f5 0%,#2b49aa 45%,#151e87 100%)" }}>
+    <header
+      className="fixed top-0 left-0 right-0 z-50 shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
+      style={{ background: "linear-gradient(95deg,#5b68f5 0%,#2b49aa 45%,#151e87 100%)" }}
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-16 h-20 flex items-center justify-between gap-6">
         {/* Left: Logo and Nav Links grouped together */}
         <div className="flex items-center gap-10 lg:gap-14">
           <button
             onClick={handleLogoClick}
-            title="Voltar ao início do site"
+            title={lang === "pt" ? "Voltar ao início do site" : "Back to top"}
             className="text-white text-2xl font-black tracking-[-0.04em] shrink-0 font-['Inter',sans-serif] hover:opacity-90 transition-opacity text-left cursor-pointer"
           >
             PEDRO <em className="not-italic italic font-black">ARMADA</em>
@@ -70,16 +56,23 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((l) => (
-              <a key={l.label} href={l.href} className="text-white/80 hover:text-white text-[15px] font-medium tracking-[-0.03em] transition-colors">
+            {navLinks.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-white/80 hover:text-white text-[15px] font-medium tracking-[-0.03em] transition-colors"
+              >
                 {l.label}
               </a>
             ))}
           </nav>
         </div>
 
-        {/* Right: Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Right: Language Switcher + Desktop CTAs */}
+        <div className="hidden md:flex items-center gap-4">
+          {/* Language Switcher Button */}
+          <LanguageSwitcher currentLang={lang} onLanguageChange={onLanguageChange} />
+
           <a
             href={LINKEDIN_URL}
             target="_blank"
@@ -87,7 +80,7 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
             className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold px-4 py-2 rounded-2xl transition-all"
           >
             <LinkedInIcon />
-            Veja meu LinkedIn
+            {tNav.viewLinkedIn}
           </a>
           <a
             href={RESUME_URL}
@@ -95,27 +88,35 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
             className="flex items-center gap-2 bg-white text-[#151e87] text-sm font-bold px-4 py-2 rounded-2xl hover:bg-white/90 transition-all"
           >
             <Download size={16} />
-            Baixar currículo
+            {tNav.downloadResume}
           </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Abrir menu"
-        >
-          <div className={`w-5 h-0.5 bg-white mb-1.5 transition-transform ${open ? "rotate-45 translate-y-2" : ""}`} />
-          <div className={`w-5 h-0.5 bg-white mb-1.5 transition-opacity ${open ? "opacity-0" : ""}`} />
-          <div className={`w-5 h-0.5 bg-white transition-transform ${open ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
+        {/* Mobile menu button */}
+        <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitcher currentLang={lang} onLanguageChange={onLanguageChange} />
+          <button
+            className="text-white p-2"
+            onClick={() => setOpen(!open)}
+            aria-label="Abrir menu"
+          >
+            <div className={`w-5 h-0.5 bg-white mb-1.5 transition-transform ${open ? "rotate-45 translate-y-2" : ""}`} />
+            <div className={`w-5 h-0.5 bg-white mb-1.5 transition-opacity ${open ? "opacity-0" : ""}`} />
+            <div className={`w-5 h-0.5 bg-white transition-transform ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden border-t border-white/10 px-6 pb-6 pt-4 flex flex-col gap-4 text-left">
-          {NAV_LINKS.map((l) => (
-            <a key={l.label} href={l.href} className="text-white/80 hover:text-white text-base font-medium" onClick={() => setOpen(false)}>
+          {navLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-white/80 hover:text-white text-base font-medium"
+              onClick={() => setOpen(false)}
+            >
               {l.label}
             </a>
           ))}
@@ -126,14 +127,14 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white/10 border border-white/20 text-white text-sm font-semibold px-4 py-2.5 rounded-2xl justify-center"
             >
-              <LinkedInIcon /> Veja meu LinkedIn
+              <LinkedInIcon /> {tNav.viewLinkedIn}
             </a>
             <a
               href={RESUME_URL}
               download="Curriculo_Pedro_Henrique_Armada_Nalis.pdf"
               className="flex items-center gap-2 bg-white text-[#151e87] text-sm font-bold px-4 py-2.5 rounded-2xl justify-center"
             >
-              <Download size={16} /> Baixar currículo
+              <Download size={16} /> {tNav.downloadResume}
             </a>
           </div>
         </div>
@@ -142,72 +143,75 @@ function Header({ onReplayIntro }: { onReplayIntro?: () => void }) {
   );
 }
 
+function HeroSection({ lang }: SectionProps) {
+  const tHero = TRANSLATIONS[lang].hero;
 
-
-function HeroSection() {
   return (
     <section className="pt-32 pb-20 px-6 lg:px-16 max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
         {/* Left: text */}
         <div className="max-w-2xl text-left">
           <p className="text-sm font-semibold tracking-widest text-[#5b68f5] uppercase mb-4 font-['Inter',sans-serif]">
-            Product / UX Designer
+            {tHero.role}
           </p>
           <h1 className="font-['IBM_Plex_Mono',monospace] font-bold text-5xl lg:text-6xl xl:text-7xl leading-[1.08] tracking-[0.02em] text-[#1c1b1b] mb-6">
-            Transformando<br />
-            ideias em{" "}
-            <span className="text-[#6822c9]">experiências<br />digitais</span>
+            {tHero.titleLine1}<br />
+            {tHero.titleLine2}{" "}
+            <span className="text-[#6822c9]">{tHero.titleHighlight}</span>
           </h1>
           <p className="text-lg text-[#494a4c] leading-relaxed mb-10 max-w-xl">
-            Product Designer focado em soluções que agregam ao negócio e melhoram a experiência do usuário, orientado a dados.
+            {tHero.subtitle}
           </p>
           <div className="flex flex-wrap gap-3">
             <a
               href="#projetos"
               className="brand-gradient text-white font-bold px-8 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px]"
             >
-              Ver meus projetos
+              {tHero.ctaProjects}
             </a>
             <a
               href="#contato"
               className="border-2 border-[#5b68f5] text-[#2b49aa] font-bold px-8 py-3.5 rounded-2xl hover:bg-[#5b68f5]/5 transition-all text-[15px]"
             >
-              Vamos conversar
+              {tHero.ctaContact}
             </a>
           </div>
-
         </div>
 
         {/* Right: profile card */}
         <div className="hidden sm:block">
-          <ProfileCard />
+          <ProfileCard lang={lang} />
         </div>
       </div>
     </section>
   );
 }
 
-function ProfileCard() {
+function ProfileCard({ lang }: SectionProps) {
+  const tCard = TRANSLATIONS[lang].profileCard;
+
   return (
     <div className="bg-[#1e2121] border-2 border-[#a6adae]/50 rounded-[15px] p-6 w-72 lg:w-80 shadow-2xl text-left">
       <div className="flex items-start gap-4 mb-4">
         <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-gray-700">
-          <img src={imgProfile} alt="Pedro Armada" className="w-full h-full object-cover" />
+          <img src={imgProfile} alt={tCard.name} className="w-full h-full object-cover" />
         </div>
         <div className="pt-1">
-          <p className="text-white font-bold text-base leading-tight mb-1">Pedro Armada</p>
-          <p className="text-white/70 text-sm mb-2">Product Designer</p>
+          <p className="text-white font-bold text-base leading-tight mb-1">{tCard.name}</p>
+          <p className="text-white/70 text-sm mb-2">{tCard.role}</p>
           <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#10783b] to-[#129649] text-white text-xs font-medium px-2.5 py-1 rounded-md">
             <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
-            Disponível
+            {tCard.statusAvailable}
           </span>
         </div>
       </div>
 
       <div className="border-t border-white/10 pt-4">
-        <p className="text-[#909797] text-xs font-medium tracking-wider uppercase mb-3">Áreas de atuação</p>
+        <p className="text-[#909797] text-xs font-medium tracking-wider uppercase mb-3">
+          {tCard.areasHeader}
+        </p>
         <div className="flex flex-wrap gap-2">
-          {SKILLS.map((skill) => (
+          {tCard.skills.map((skill) => (
             <span key={skill} className="skill-pill text-white text-xs font-medium px-3 py-1 rounded-full">
               {skill}
             </span>
@@ -216,10 +220,10 @@ function ProfileCard() {
       </div>
 
       <div className="border-t border-white/10 mt-4 pt-4 grid grid-cols-3 gap-2 text-center">
-        {[["2+", "Anos exp."], ["3+", "Projetos"], ["3", "Empresas"]].map(([val, lab]) => (
-          <div key={lab}>
+        {tCard.stats.map(({ val, label }) => (
+          <div key={label}>
             <p className="text-white font-bold text-lg leading-tight">{val}</p>
-            <p className="text-white/50 text-xs">{lab}</p>
+            <p className="text-white/50 text-xs">{label}</p>
           </div>
         ))}
       </div>
@@ -227,28 +231,47 @@ function ProfileCard() {
   );
 }
 
-function ProjectsSection() {
+function ProjectsSection({ lang }: SectionProps) {
+  const tProjects = TRANSLATIONS[lang].projectsSection;
+
+  const projectImages = [imgSkoob, undefined, undefined];
+  const projectLinks = [
+    "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+    BEHANCE_URL,
+    BEHANCE_URL,
+  ];
+  const projectColors = [
+    "from-[#5b68f5] to-[#2b49aa]",
+    "from-[#6822c9] to-[#2b49aa]",
+    "from-[#2b49aa] to-[#151e87]",
+  ];
+
   return (
     <section id="projetos" className="py-20 px-6 lg:px-16 bg-white/60">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <p className="text-sm font-semibold tracking-widest text-[#5b68f5] uppercase mb-2">Portfólio</p>
+            <p className="text-sm font-semibold tracking-widest text-[#5b68f5] uppercase mb-2">
+              {tProjects.badge}
+            </p>
             <h2 className="font-['IBM_Plex_Mono',monospace] font-bold text-4xl lg:text-5xl tracking-[0.03em] text-[#1c1b1b]">
-              Projetos
+              {tProjects.title}
             </h2>
           </div>
           <a
             href="#contato"
             className="text-[#2b49aa] font-semibold text-sm underline underline-offset-4 hover:text-[#151e87] transition-colors whitespace-nowrap"
           >
-            Tem um projeto em mente? →
+            {tProjects.ctaHaveProject}
           </a>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS.map((p) => {
-            const targetLink = p.link || BEHANCE_URL;
+          {tProjects.items.map((p, idx) => {
+            const image = projectImages[idx];
+            const targetLink = projectLinks[idx] || BEHANCE_URL;
+            const color = projectColors[idx];
+
             return (
               <article
                 key={p.title}
@@ -260,14 +283,14 @@ function ProjectsSection() {
                   rel="noopener noreferrer"
                   className="block relative h-48 overflow-hidden bg-gray-100"
                 >
-                  {p.image ? (
+                  {image ? (
                     <img
-                      src={p.image}
+                      src={image}
                       alt={p.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${p.color}`} />
+                    <div className={`w-full h-full bg-gradient-to-br ${color}`} />
                   )}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
                     {p.tags.map((t) => (
@@ -300,7 +323,7 @@ function ProjectsSection() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto"
                   >
-                    Ver case study <span className="text-base">→</span>
+                    {tProjects.viewCaseStudy}
                   </a>
                 </div>
               </article>
@@ -315,7 +338,7 @@ function ProjectsSection() {
             rel="noopener noreferrer"
             className="brand-gradient inline-block text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px]"
           >
-            Ver todos os projetos no Behance
+            {tProjects.viewAllBehance}
           </a>
         </div>
       </div>
@@ -323,25 +346,27 @@ function ProjectsSection() {
   );
 }
 
-function AboutSection() {
+function AboutSection({ lang }: SectionProps) {
+  const tAbout = TRANSLATIONS[lang].about;
+
   return (
     <section id="sobre" className="py-24 px-6 lg:px-16 brand-gradient">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_360px] gap-16 items-start">
         <div>
-          <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-4">Quem sou eu</p>
+          <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-4">
+            {tAbout.badge}
+          </p>
           <h2 className="font-['IBM_Plex_Mono',monospace] font-bold text-5xl lg:text-6xl tracking-[0.03em] text-white mb-8">
-            Sobre mim
+            {tAbout.title}
           </h2>
           <div className="space-y-5 text-[#ccd4d4] text-lg leading-relaxed">
             <p>
-              Muito Prazer! Me chamo <strong className="text-white">Pedro Henrique Armada Nalis</strong>, tenho 22 anos e atuo como Product/UX Designer desde 2023, movido pela curiosidade e paixão de resolver problemas através do design.
+              {tAbout.p1Line1}
+              <strong className="text-white">{tAbout.p1Name}</strong>
+              {tAbout.p1Line2}
             </p>
-            <p>
-              Sou formado em Sistemas de Informação e descobri a profissão durante a minha trajetória no curso, onde sempre tive um perfil mais analítico e visual, mas não muito forte com código, até descobrir que havia uma área que se encaixava perfeitamente comigo: UX/UI Design. Mergulhei de cabeça nos estudos e vi que ali era onde estava meu potencial, mas sem dispensar a bagagem que consegui com meu período na programação, visto que hoje ela me ajuda a tomar decisões melhores e me permite ter uma boa comunicação com times de desenvolvimento.
-            </p>
-            <p>
-              Pra além do trabalho, sempre gostei de ter diversos hobbies desde pequeno. Hoje no meu tempo livre, gosto muito de tocar baixo, ler livros e quadrinhos, ver filmes e jogar videogame. Não só são atividades que eu gosto muito, mas elas também me ajudam a estimular minha criatividade e minhas ideias.
-            </p>
+            <p>{tAbout.p2}</p>
+            <p>{tAbout.p3}</p>
           </div>
           <div className="flex flex-wrap gap-3 mt-10">
             <a
@@ -351,7 +376,7 @@ function AboutSection() {
               className="flex items-center gap-2 bg-white text-[#151e87] font-bold px-6 py-3 rounded-2xl hover:bg-white/90 transition-all text-sm"
             >
               <LinkedInIcon />
-              Veja meu LinkedIn
+              {tAbout.viewLinkedIn}
             </a>
             <a
               href={RESUME_URL}
@@ -359,23 +384,23 @@ function AboutSection() {
               className="flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-2xl hover:bg-white/20 transition-all text-sm"
             >
               <Download size={16} />
-              Baixar currículo
+              {tAbout.downloadResume}
             </a>
           </div>
         </div>
 
         {/* Stats card */}
         <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 self-start">
-          <h3 className="text-white font-bold text-lg mb-6">Em números</h3>
+          <h3 className="text-white font-bold text-lg mb-6">{tAbout.statsTitle}</h3>
           <div className="space-y-5">
-            {[
-              ["2+", "anos de experiência em UX/UI Design"],
-              ["3+", "projetos entregues com impacto mensurável"],
-              ["3", "empresas em setores distintos"],
-              ["100%", "orientado a dados e ao usuário"],
-            ].map(([val, desc]) => (
-              <div key={desc} className="flex items-center gap-4 border-b border-white/10 pb-5 last:border-0 last:pb-0">
-                <span className="font-['IBM_Plex_Mono',monospace] font-bold text-3xl text-white shrink-0 w-20">{val}</span>
+            {tAbout.stats.map(({ val, desc }) => (
+              <div
+                key={desc}
+                className="flex items-center gap-4 border-b border-white/10 pb-5 last:border-0 last:pb-0"
+              >
+                <span className="font-['IBM_Plex_Mono',monospace] font-bold text-3xl text-white shrink-0 w-20">
+                  {val}
+                </span>
                 <span className="text-white/70 text-sm leading-snug">{desc}</span>
               </div>
             ))}
@@ -386,18 +411,22 @@ function AboutSection() {
   );
 }
 
-function ContactSection() {
+function ContactSection({ lang }: SectionProps) {
+  const tContact = TRANSLATIONS[lang].contact;
+
   return (
     <section id="contato" className="py-24 px-6 lg:px-16 bg-[#f6f7fb]">
       <div className="max-w-3xl mx-auto text-center">
-        <p className="text-sm font-semibold tracking-widest text-[#5b68f5] uppercase mb-4">Vamos trabalhar juntos</p>
+        <p className="text-sm font-semibold tracking-widest text-[#5b68f5] uppercase mb-4">
+          {tContact.badge}
+        </p>
         <h2 className="font-['IBM_Plex_Mono',monospace] font-bold text-4xl lg:text-5xl tracking-[0.02em] text-[#1c1b1b] mb-6 leading-tight">
-          Tem uma ideia de projeto?<br />
-          <span className="text-[#6822c9]">Vamos conversar!</span>
+          {tContact.titleLine1}<br />
+          <span className="text-[#6822c9]">{tContact.titleHighlight}</span>
         </h2>
         <p className="text-[#494a4c] text-lg mb-10 leading-relaxed">
-          Estou disponível para projetos freelance, colaborações e oportunidades full-time.<br />
-          Me mande uma mensagem para nos conhecermos melhor!
+          {tContact.subtitleLine1}<br />
+          {tContact.subtitleLine2}
         </p>
         <div className="flex justify-center">
           <a
@@ -407,7 +436,7 @@ function ContactSection() {
             className="brand-gradient inline-flex items-center justify-center gap-3 text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-base"
           >
             <LinkedInIcon className="w-5 h-5 text-white" />
-            Me mande uma mensagem
+            {tContact.ctaButton}
           </a>
         </div>
       </div>
@@ -415,7 +444,9 @@ function ContactSection() {
   );
 }
 
-function Footer() {
+function Footer({ lang }: SectionProps) {
+  const tFooter = TRANSLATIONS[lang].footer;
+
   return (
     <footer className="border-t border-[#e2e4f0] py-8 px-6 lg:px-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-4">
@@ -423,7 +454,7 @@ function Footer() {
         <div className="flex items-center justify-center md:justify-start">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            title="Voltar ao início do site"
+            title={lang === "pt" ? "Voltar ao início do site" : "Back to top"}
             className="text-[#1c1b1b] font-black text-xl tracking-[-0.04em] font-['Inter',sans-serif] hover:opacity-80 transition-opacity cursor-pointer text-left"
           >
             PEDRO <em className="not-italic italic">ARMADA</em>
@@ -432,9 +463,7 @@ function Footer() {
 
         {/* Center: Copyright */}
         <div className="text-center">
-          <p className="text-[#909797] text-sm">
-            © 2026 Pedro Armada.
-          </p>
+          <p className="text-[#909797] text-sm">{tFooter.copyright}</p>
         </div>
 
         {/* Right: Social icons */}
@@ -463,10 +492,6 @@ function Footer() {
   );
 }
 
-
-
-
-
 function LinkedInIcon({ className = "" }: { className?: string }) {
   return (
     <svg className={`w-4 h-4 ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -483,10 +508,17 @@ function BehanceIcon({ className = "" }: { className?: string }) {
   );
 }
 
-
 export default function App() {
   const [splashKey, setSplashKey] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [lang, setLang] = useState<Language>(() => {
+    return (localStorage.getItem("portfolio_lang") as Language) || "pt";
+  });
+
+  const handleLanguageChange = (newLang: Language) => {
+    setLang(newLang);
+    localStorage.setItem("portfolio_lang", newLang);
+  };
 
   const handleReplayIntro = () => {
     setSplashKey((prev) => prev + 1);
@@ -514,15 +546,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f6f7fb] relative">
       <SplashScreen key={splashKey} />
-      <Header onReplayIntro={handleReplayIntro} />
+      <Header lang={lang} onLanguageChange={handleLanguageChange} onReplayIntro={handleReplayIntro} />
       <main>
-        <HeroSection />
-        <ProjectsSection />
-        <Timeline />
-        <AboutSection />
-        <ContactSection />
+        <HeroSection lang={lang} />
+        <ProjectsSection lang={lang} />
+        <Timeline lang={lang} />
+        <AboutSection lang={lang} />
+        <ContactSection lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
 
       {/* Floating Back to Top Button */}
       <div
@@ -533,15 +565,13 @@ export default function App() {
         <button
           onClick={scrollToTop}
           className="flex items-center gap-2 bg-[#151e87]/90 hover:bg-[#151e87] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
-          title="Voltar ao topo da página"
-          aria-label="Voltar ao topo"
+          title={TRANSLATIONS[lang].scrollTop}
+          aria-label={TRANSLATIONS[lang].scrollTop}
         >
           <ArrowUp size={15} />
-          <span>Voltar ao topo</span>
+          <span>{TRANSLATIONS[lang].scrollTop}</span>
         </button>
       </div>
     </div>
   );
 }
-
-
