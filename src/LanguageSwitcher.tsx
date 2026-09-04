@@ -49,17 +49,16 @@ export default function LanguageSwitcher({
 }: LanguageSwitcherProps) {
   return (
     <div className={`relative inline-flex items-center ${className}`}>
-      {/* Invisible Glass Filter definition */}
+      {/* Glass Filter definition */}
       <GlassFilter />
 
-      {/* Glassmorphic Container */}
+      {/* Container */}
       <div className="relative flex items-center p-1 rounded-full bg-white/10 border border-white/20 shadow-inner backdrop-blur-md select-none overflow-hidden">
-        {/* Animated Active Glass Pill */}
+        {/* Animated Solid White Active Pill */}
         <div
-          className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-gradient-to-r from-[#5b68f5] to-[#6822c9] shadow-md transition-all duration-300 ease-out`}
+          className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-white shadow-md transition-all duration-300 ease-out"
           style={{
             left: currentLang === "pt" ? "4px" : "calc(50%)",
-            filter: "url(#radio-glass)",
           }}
         />
 
@@ -67,8 +66,8 @@ export default function LanguageSwitcher({
         <button
           type="button"
           onClick={() => onLanguageChange("pt")}
-          className={`relative z-10 flex items-center gap-1.5 px-3 py-1 text-xs font-bold transition-colors duration-200 cursor-pointer ${
-            currentLang === "pt" ? "text-white" : "text-white/70 hover:text-white"
+          className={`relative z-10 flex items-center gap-1.5 px-3 py-1 text-xs font-extrabold transition-colors duration-200 cursor-pointer ${
+            currentLang === "pt" ? "text-[#151e87]" : "text-white/70 hover:text-white"
           }`}
           aria-label="Alternar para Português"
         >
@@ -79,8 +78,8 @@ export default function LanguageSwitcher({
         <button
           type="button"
           onClick={() => onLanguageChange("en")}
-          className={`relative z-10 flex items-center gap-1.5 px-3 py-1 text-xs font-bold transition-colors duration-200 cursor-pointer ${
-            currentLang === "en" ? "text-white" : "text-white/70 hover:text-white"
+          className={`relative z-10 flex items-center gap-1.5 px-3 py-1 text-xs font-extrabold transition-colors duration-200 cursor-pointer ${
+            currentLang === "en" ? "text-[#151e87]" : "text-white/70 hover:text-white"
           }`}
           aria-label="Switch to English"
         >
