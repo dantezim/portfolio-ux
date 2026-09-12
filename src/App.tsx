@@ -10,6 +10,7 @@ import { TRANSLATIONS, type Language } from "./i18n/translations";
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
 const BEHANCE_URL = "https://www.behance.net/pedroharmada";
 const RESUME_URL = "/curriculo-pedro-armada.pdf";
+const EMAIL_URL = "mailto:ph.armada.nalis@gmail.com";
 
 interface SectionProps {
   lang: Language;
