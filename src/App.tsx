@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Download, ArrowUp } from "lucide-react";
+import { Download, ArrowUp, Mail } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
 import imgSkoob from "./assets/skoob-cover.png";
 import SplashScreen from "./SplashScreen";
@@ -192,11 +192,11 @@ function ProfileCard({ lang }: SectionProps) {
 
   return (
     <div className="bg-[#1e2121] border-2 border-[#a6adae]/50 rounded-[15px] p-6 w-72 lg:w-80 shadow-2xl text-left">
-      <div className="flex items-start gap-4 mb-4">
+      <div className="flex items-start gap-4 mb-3">
         <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-gray-700">
           <img src={imgProfile} alt={tCard.name} className="w-full h-full object-cover" />
         </div>
-        <div className="pt-1">
+        <div className="pt-1 min-w-0">
           <p className="text-white font-bold text-base leading-tight mb-1">{tCard.name}</p>
           <p className="text-white/70 text-sm mb-2">{tCard.role}</p>
           <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#10783b] to-[#129649] text-white text-xs font-medium px-2.5 py-1 rounded-md">
@@ -206,7 +206,15 @@ function ProfileCard({ lang }: SectionProps) {
         </div>
       </div>
 
-      <div className="border-t border-white/10 pt-4">
+      {/* Email Text (Plain String) */}
+      <div className="border-t border-white/10 pt-3 pb-1">
+        <div className="flex items-center gap-2 text-white/80 text-xs font-medium truncate">
+          <Mail size={14} className="text-[#5b68f5] shrink-0" />
+          <span className="truncate font-mono">ph.armada.nalis@gmail.com</span>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10 pt-3">
         <p className="text-[#909797] text-xs font-medium tracking-wider uppercase mb-3">
           {tCard.areasHeader}
         </p>
