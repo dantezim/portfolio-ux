@@ -2,7 +2,7 @@ import type { Language } from "./i18n/translations";
 
 export function GlassFilter() {
   return (
-    <svg className="hidden" aria-hidden="true">
+    <svg className="absolute w-0 h-0 overflow-hidden pointer-events-none opacity-0" aria-hidden="true">
       <defs>
         <filter
           id="radio-glass"
