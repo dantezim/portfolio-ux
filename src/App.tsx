@@ -524,12 +524,26 @@ export default function App() {
   const [splashKey, setSplashKey] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [lang, setLang] = useState<Language>(() => {
-    return (localStorage.getItem("portfolio_lang") as Language) || "pt";
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        const saved = localStorage.getItem("portfolio_lang") as Language;
+        if (saved === "pt" || saved === "en") return saved;
+      }
+    } catch {
+      // Fallback if localStorage is restricted
+    }
+    return "pt";
   });
 
   const handleLanguageChange = (newLang: Language) => {
     setLang(newLang);
-    localStorage.setItem("portfolio_lang", newLang);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("portfolio_lang", newLang);
+      }
+    } catch {
+      // Fallback
+    }
   };
 
   const handleReplayIntro = () => {
