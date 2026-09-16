@@ -219,7 +219,7 @@ export const TRANSLATIONS = {
       titleLine1: "Tem uma ideia de projeto?",
       titleHighlight: "Vamos conversar!",
       subtitleLine1: "Estou disponível para projetos freelance, colaborações e oportunidades full-time.",
-      subtitleLine2: "Me mande uma mensagem para nos conhecermos melhor!",
+      subtitleLine2: "Me mande um e-mail para ph.armada.nalis@gmail.com ou me mande uma mensagem no LinkedIn para nos conhecermos melhor!",
       ctaButton: "Me mande uma mensagem",
     },
     footer: {
@@ -429,7 +429,7 @@ export const TRANSLATIONS = {
       titleLine1: "Have a project idea?",
       titleHighlight: "Let's talk!",
       subtitleLine1: "I'm available for freelance projects, team collaborations, and full-time opportunities.",
-      subtitleLine2: "Send me a message to get in touch!",
+      subtitleLine2: "Send me an email at ph.armada.nalis@gmail.com or connect with me on LinkedIn to get in touch!",
       ctaButton: "Send me a message",
     },
     footer: {
