@@ -122,7 +122,7 @@ export default function Timeline({ lang }: TimelineProps) {
                               return (
                                 <strong
                                   key={pIdx}
-                                  className="font-bold text-white bg-[#5b68f5]/20 border border-[#5b68f5]/40 px-1.5 py-0.5 rounded text-xs md:text-sm inline-block my-0.5"
+                                  className="font-semibold text-[#a4b1ff] bg-[#5b68f5]/15 border border-[#5b68f5]/30 px-1.5 py-0.5 rounded text-xs md:text-sm"
                                 >
                                   {part.slice(2, -2)}
                                 </strong>
