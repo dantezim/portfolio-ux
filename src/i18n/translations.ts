@@ -44,7 +44,7 @@ export const TRANSLATIONS = {
       areasHeader: "Áreas de atuação",
       skills: ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"],
       stats: [
-        { val: "-60%", label: "TMA (Atendimento)" },
+        { val: "-60%", label: "TMA" },
         { val: "-20%", label: "Transbordo" },
         { val: "+10%", label: "Retenção" },
       ],
