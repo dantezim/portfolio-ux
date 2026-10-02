@@ -223,12 +223,12 @@ function ProfileCard({ lang }: SectionProps) {
         {tCard.stats.map(({ val, label }) => (
           <div
             key={label}
-            className="bg-white/[0.04] border border-white/10 rounded-xl py-2 px-1 transition-all duration-200 hover:bg-white/[0.08] hover:border-white/20"
+            className="bg-white/[0.04] border border-white/10 rounded-xl py-2 px-1 hover:bg-white/[0.08] hover:border-white/20 transition-all"
           >
-            <p className="text-2xl lg:text-[26px] font-black bg-gradient-to-r from-[#7c88ff] via-[#a855f7] to-[#38bdf8] bg-clip-text text-transparent leading-tight">
+            <p className="text-xl lg:text-2xl font-black text-[#5b68f5] leading-tight">
               {val}
             </p>
-            <p className="text-white/70 text-[11px] lg:text-xs font-semibold mt-0.5">{label}</p>
+            <p className="text-white/80 text-[11px] font-medium mt-0.5 leading-snug">{label}</p>
           </div>
         ))}
       </div>

@@ -44,9 +44,9 @@ export const TRANSLATIONS = {
       areasHeader: "Áreas de atuação",
       skills: ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"],
       stats: [
-        { val: "2+", label: "Anos exp." },
-        { val: "3+", label: "Projetos" },
-        { val: "3", label: "Empresas" },
+        { val: "-60%", label: "TMA (Atendimento)" },
+        { val: "-20%", label: "Transbordo" },
+        { val: "+10%", label: "Retenção" },
       ],
     },
     projectsSection: {
@@ -116,8 +116,8 @@ export const TRANSLATIONS = {
             "Design de Interfaces (UI) & Design System: Criação de interfaces visuais e protótipos navegáveis de alta fidelidade no Figma para plataformas B2B (Saúde e Educação), implementando componentes modulares, variantes, Auto Layout e handoff técnico detalhado com especificações de engenharia.",
             "Jornadas Conversacionais & UX Writing: Concepção de jornadas conversacionais completas (WhatsApp e Webchat) no FigJam/Figma, realizando mapeamento de fluxos, árvores de decisão e UX Writing orientado ao tom de voz do produto, integrando fluxos de NLP/NLU via IBM Watson.",
             "Curadoria Orientada a Dados: Liderança na rotina de curadoria analítica de jornadas baseada em dados de conversas e comportamento dos usuários, refinando intenções do bot, reduzindo fallbacks e aumentando a resolutividade do autoatendimento.",
-            "Impacto Mensurável em Ensino Superior: Redução de 20% no volume de transbordo para atendimento humano e aumento de 10% na retenção de usuários na principal experiência conversacional de instituição brasileira de grande porte.",
-            "Concepção 0 to 1 em Farmácias de Grande Porte: Design e lançamento de solução conversacional para automação de atendimento, alcançando redução de 60% no Tempo Médio de Atendimento (TMA de 5 para 2 minutos).",
+            "Impacto Mensurável em Ensino Superior: **Redução de 20% no volume de transbordo** para atendimento humano e **aumento de 10% na retenção** de usuários na principal experiência conversacional de instituição brasileira de grande porte.",
+            "Concepção 0 to 1 em Farmácias de Grande Porte: Design e lançamento de solução conversacional para automação de atendimento, alcançando **redução de 60% no Tempo Médio de Atendimento (TMA de 5 para 2 minutos)**.",
             "Governança & Previsibilidade de Entregas: Estruturação de novo framework de documentação e entrega de projetos de design, acelerando aprovação de fluxos junto a stakeholders e garantindo maior previsibilidade de resultados para os clientes.",
           ],
           tags: [
@@ -140,7 +140,7 @@ export const TRANSLATIONS = {
             "Concepção 0 to 1 de Plataforma Web (SouAmiGU): Atuação multidisciplinar na criação de ponta a ponta da plataforma web de gestão de hackathons, desenhando jornadas completas para participantes (inscrição, formação de equipes, submissão) e administradores (gestão de bancas, avaliação e métricas).",
             "Discovery, Benchmarking & Arquitetura da Informação: Condução de pesquisas de requisitos e benchmarking no FigJam para estruturar a proposta de valor, regras de negócio e fluxos intuitivos de navegação.",
             "Prototipação em Alta Fidelidade & Design System: Mapeamento de fluxos e prototipação de alta fidelidade navegável no Figma, além da criação do Design System do projeto para assegurar consistência visual e escalabilidade.",
-            "Resolução de Gargalos Operacionais & Viabilidade Técnica: Centralização do ecossistema de hackathons em um fluxo digital único (eliminando dispersão em planilhas e formulários), com protótipo final documentado em ciclo de 4 meses e validação prévia de viabilidade técnica com desenvolvedores.",
+            "Resolução de Gargalos Operacionais & Viabilidade Técnica: Centralização do ecossistema de hackathons em um fluxo digital único (eliminando dispersão em planilhas e formulários), com protótipo final documentado em **ciclo de 4 meses** e validação prévia de viabilidade técnica com desenvolvedores.",
           ],
           tags: [
             "Product Design (0 to 1)",
@@ -248,9 +248,9 @@ export const TRANSLATIONS = {
       areasHeader: "Core Skills",
       skills: ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"],
       stats: [
-        { val: "2+", label: "Yrs Exp." },
-        { val: "3+", label: "Projects" },
-        { val: "3", label: "Companies" },
+        { val: "-60%", label: "Avg Handle Time" },
+        { val: "-20%", label: "Agent Handoff" },
+        { val: "+10%", label: "User Retention" },
       ],
     },
     projectsSection: {
