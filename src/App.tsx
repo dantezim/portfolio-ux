@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Download, ArrowUp } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
 import imgSkoob from "./assets/skoob-cover.png";
+import imgDuolingo from "./assets/duolingo-cover.png";
 import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -244,9 +245,10 @@ function ProjectsSection({ lang }: SectionProps) {
 
   const tProjects = TRANSLATIONS[lang].projectsSection;
 
-  const projectImages: (string | undefined)[] = [imgSkoob, undefined, undefined, undefined];
+  const projectImages: (string | undefined)[] = [imgSkoob, imgDuolingo, undefined, undefined, undefined];
   const projectColors = [
     "from-[#5b68f5] to-[#2b49aa]",
+    "from-[#58cc02] to-[#2b49aa]",
     "from-[#6822c9] to-[#2b49aa]",
     "from-[#2b49aa] to-[#151e87]",
     "from-[#10783b] to-[#2b49aa]",

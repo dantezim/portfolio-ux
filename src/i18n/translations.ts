@@ -103,6 +103,41 @@ export const TRANSLATIONS = {
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
         },
         {
+          id: "duolingo",
+          title: "Redesign do Onboarding Duolingo",
+          subtitle: "Análise de Fricção no Funil & Teste Remoto de Onboarding Enxuto",
+          description:
+            "Pesquisa de UX Analytics e proposta de redesign enxuto para reduzir o atrito e acelerar a conclusão da primeira lição no Duolingo.",
+          tags: ["UX Research", "UX Design", "Redesign", "Design System"],
+          role: "UX Analyst & Product Designer",
+          period: "Outubro / 2026",
+          overview:
+            "Estudo de UX Analytics e Redesign comportamental focado em otimizar o funil de onboarding do Duolingo (do cadastro até a conclusão da primeira lição). Analisamos o comportamento de 8.000 usuários em uma base sintética e conduzimos um teste remoto não moderado no Maze comparando o fluxo original com a nossa proposta enxuta.",
+          challenge:
+            "Metade dos novos usuários (50,2%) não concluía a primeira lição. A maior queda do funil acontecia no teste de nivelamento (-29,2% de perda). Além disso, no Android o fluxo acumulava 2,2 vezes mais erros por usuário do que no iOS (2,05 vs 0,94 erros) e exigia um cadastro de 3 telas logo na entrada.",
+          solution:
+            "Redesenho da jornada de onboarding no Figma, reduzindo o fluxo de 26 para 20 telas. Eliminamos 6 telas de transição e perguntas secundárias, adicionamos a funcionalidade 'Pular Nivelamento' para levar o usuário direto à prática e unificamos o cadastro em 1 tela simplificada.",
+          methodology: [
+            "Análise de Funil com Base Sintética de 8.000 usuários (Google Sheets)",
+            "Plano de Instrumentação de Métricas com 6 Eventos Rastreáveis",
+            "Análise Comparativa por Dispositivo (Android vs iOS)",
+            "Protótipos Navegáveis no Figma (Versão A: Controle x Versão B: Proposta Enxuta)",
+            "Teste Remoto Não Moderado no Maze (50 participantes / Análise pareada com 22 usuários)",
+            "Avaliação de Princípios Éticos e de IA via Scorecard Humanifesto",
+          ],
+          insights: [
+            "Tempo 44% mais rápido: Os usuários concluíram a primeira lição em 68 segundos na Versão B, contra 122 segundos no fluxo original A.",
+            "24% escolheram pular o nivelamento: Dar autonomia aos leitores/estudantes desobstrui a jornada inicial imediatamente.",
+            "Fricção no cadastro precoce: Exigir criação de conta ou login logo na entrada gerou resistência; o cadastro deve vir após o usuário sentir o valor da 1ª lição.",
+          ],
+          results: [
+            "Redução significativa no tempo mediano da primeira lição (de 122s para 68s no Maze)",
+            "Encurtamento do fluxo de onboarding de 26 para 20 telas no Figma",
+            "Identificação da maior etapa de fricção (-29,2% no nivelamento) e validação da opção de pular",
+            "Elaboração de Backlog priorizado por impacto vs esforço e Scorecard de IA para o próximo ciclo de experimentos",
+          ],
+        },
+        {
           id: "farmacias-forbi",
           title: "Farmácias Forbi",
           subtitle: "Automação Conversacional & Redução de 60% no TMA",
@@ -385,6 +420,41 @@ export const TRANSLATIONS = {
             "Increased estimated retention and continuous reader engagement",
           ],
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+        },
+        {
+          id: "duolingo",
+          title: "Duolingo Onboarding Redesign",
+          subtitle: "Funnel Friction Analysis & Remote A/B Testing of Lean Onboarding",
+          description:
+            "UX Analytics research and lean redesign proposal reducing friction and accelerating first lesson completion on Duolingo.",
+          tags: ["UX Research", "UX Design", "Redesign", "Design System"],
+          role: "UX Analyst & Product Designer",
+          period: "October / 2026",
+          overview:
+            "UX Analytics and behavioral redesign study focused on optimizing Duolingo's onboarding funnel (from signup to first lesson completion). We analyzed baseline data across 8,000 synthetic users and conducted unmoderated remote testing on Maze comparing the current Android flow with our lean proposal.",
+          challenge:
+            "Only 50.2% of new users completed their first lesson. The largest funnel drop-off occurred during placement testing (29.2% loss). Android users experienced 2.2x more onboarding errors than iOS users (2.05 vs 0.94 errors) while encountering an upfront 3-screen registration wall.",
+          solution:
+            "Redesigned the onboarding flow in Figma, trimming total screens from 26 to 20. We removed 6 filler transition screens, added a 'Skip Placement' shortcut to jump straight into learning, and streamlined signup into 1 simple screen.",
+          methodology: [
+            "Funnel & Baseline Analytics on 8,000 User Dataset (Google Sheets)",
+            "Minimum Instrumentation Plan with 6 Tracked Telemetry Events",
+            "Cross-Device Friction Analysis (Android vs iOS)",
+            "Navigable Figma Prototypes (Control Version A vs Lean Proposal B)",
+            "Unmoderated Remote Usability Testing via Maze (50 participants / 22 paired-sample analysis)",
+            "Ethical AI Evaluation Framework via Humanifesto Scorecard",
+          ],
+          insights: [
+            "44% faster task completion: Median time to finish the first lesson dropped from 122s (Control A) to 68s (Proposal B).",
+            "24% chose to skip placement: Giving learners autonomy to skip placement tests immediately unblocks early retention.",
+            "Early signup friction: Demanding account registration upfront created drop-off; signup should happen after experiencing initial lesson value.",
+          ],
+          results: [
+            "Reduced median time-to-first-lesson by 44% (from 122s to 68s in Maze testing)",
+            "Streamlined total onboarding steps from 26 down to 20 screens in Figma",
+            "Pinpointed placement test friction (-29.2% drop) and validated shortcut autonomy",
+            "Delivered an impact vs. effort prioritized backlog and AI Scorecard for next iteration cycles",
+          ],
         },
         {
           id: "farmacias-forbi",
