@@ -5,7 +5,8 @@ import imgSkoob from "./assets/skoob-cover.png";
 import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { TRANSLATIONS, type Language } from "./i18n/translations";
+import ProjectModal from "./ProjectModal";
+import { TRANSLATIONS, type Language, type ProjectTranslation } from "./i18n/translations";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
 const BEHANCE_URL = "https://www.behance.net/pedroharmada";
@@ -237,19 +238,25 @@ function ProfileCard({ lang }: SectionProps) {
 }
 
 function ProjectsSection({ lang }: SectionProps) {
+  const [activeProject, setActiveProject] = useState<ProjectTranslation | null>(null);
+  const [activeImage, setActiveImage] = useState<string | undefined>(undefined);
+  const [activeColor, setActiveColor] = useState<string | undefined>(undefined);
+
   const tProjects = TRANSLATIONS[lang].projectsSection;
 
-  const projectImages = [imgSkoob, undefined, undefined];
-  const projectLinks = [
-    "https://www.behance.net/gallery/254848485/Redesign-Skoob",
-    BEHANCE_URL,
-    BEHANCE_URL,
-  ];
+  const projectImages: (string | undefined)[] = [imgSkoob, undefined, undefined, undefined];
   const projectColors = [
     "from-[#5b68f5] to-[#2b49aa]",
     "from-[#6822c9] to-[#2b49aa]",
     "from-[#2b49aa] to-[#151e87]",
+    "from-[#10783b] to-[#2b49aa]",
   ];
+
+  const handleOpenModal = (p: ProjectTranslation, image?: string, color?: string) => {
+    setActiveProject(p);
+    setActiveImage(image);
+    setActiveColor(color);
+  };
 
   return (
     <section id="projetos" className="py-20 px-6 lg:px-16 bg-white/60">
@@ -271,23 +278,18 @@ function ProjectsSection({ lang }: SectionProps) {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
           {tProjects.items.map((p, idx) => {
             const image = projectImages[idx];
-            const targetLink = projectLinks[idx] || BEHANCE_URL;
-            const color = projectColors[idx];
+            const color = projectColors[idx % projectColors.length];
 
             return (
               <article
-                key={p.title}
-                className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                key={p.id || p.title}
+                onClick={() => handleOpenModal(p, image, color)}
+                className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer"
               >
-                <a
-                  href={targetLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative h-48 overflow-hidden bg-gray-100"
-                >
+                <div className="block relative h-48 overflow-hidden bg-gray-100">
                   {image ? (
                     <img
                       src={image}
@@ -307,29 +309,24 @@ function ProjectsSection({ lang }: SectionProps) {
                       </span>
                     ))}
                   </div>
-                </a>
+                </div>
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug">
-                      <a
-                        href={targetLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#5b68f5] transition-colors"
-                      >
-                        {p.title}
-                      </a>
+                    <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug group-hover:text-[#5b68f5] transition-colors">
+                      {p.title}
                     </h3>
-                    <p className="text-[#494a4c] text-sm leading-relaxed mb-5">{p.description}</p>
+                    <p className="text-[#494a4c] text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
                   </div>
-                  <a
-                    href={targetLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto"
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenModal(p, image, color);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto self-start cursor-pointer"
                   >
                     {tProjects.viewCaseStudy}
-                  </a>
+                  </button>
                 </div>
               </article>
             );
@@ -347,6 +344,15 @@ function ProjectsSection({ lang }: SectionProps) {
           </a>
         </div>
       </div>
+
+      {/* Case Study Modal */}
+      <ProjectModal
+        project={activeProject}
+        image={activeImage}
+        gradientColor={activeColor}
+        lang={lang}
+        onClose={() => setActiveProject(null)}
+      />
     </section>
   );
 }

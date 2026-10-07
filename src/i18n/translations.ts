@@ -1,9 +1,18 @@
 export type Language = "pt" | "en";
 
 export interface ProjectTranslation {
+  id: string;
   title: string;
+  subtitle?: string;
   description: string;
   tags: string[];
+  role?: string;
+  period?: string;
+  overview?: string;
+  challenge?: string;
+  solution?: string;
+  results?: string[];
+  behanceUrl?: string;
 }
 
 export interface ExperienceTranslation {
@@ -57,22 +66,89 @@ export const TRANSLATIONS = {
       viewAllBehance: "Ver todos os projetos no Behance",
       items: [
         {
+          id: "skoob",
           title: "Redesign do Skoob",
+          subtitle: "Pesquisa de UX & Comunidades de Leitura",
           description:
             "Pesquisa de UX com o objetivo de entender o comportamento dos leitores e desenhar a nova funcionalidade de comunidades de leitura no Skoob.",
           tags: ["UX Research", "UX Design", "Comunidades"],
+          role: "Lead UX Researcher & Product Designer",
+          period: "2024",
+          overview:
+            "Estudo de UX Design e arquitetura da informação voltado para a modernização da maior rede social de leitores do Brasil (Skoob), focando no fortalecimento de comunidades de leitura e descoberta de livros.",
+          challenge:
+            "O aplicativo do Skoob apresentava baixa retenção em grupos de leitura e uma navegação fragmentada entre a estante virtual e o feed social.",
+          solution:
+            "Condução de pesquisas qualitativas com leitores, mapeamento de jornadas, criação de protótipos de alta fidelidade e arquitetura de um ecossistema fluido para grupos de leitura.",
+          results: [
+            "Novo fluxo intuitivo para grupos e clubes de leitura",
+            "Prototipagem em alta fidelidade navegável no Figma",
+            "Validação com leitores e testes de usabilidade",
+          ],
+          behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
         },
         {
-          title: "Farmácias Forbi - Jornada de Atendimento (Em construção 🚧)",
+          id: "farmacias-forbi",
+          title: "Farmácias Forbi",
+          subtitle: "Automação Conversacional & Redução de 60% no TMA",
           description:
             "Fluxo conversacional para uma grande rede de farmácias, cujo objetivo era automatizar a jornada dos clientes e reduzir o TMA.",
           tags: ["UX Design", "Chatbots", "Design Conversacional"],
+          role: "UX/UI Designer & Conversational Designer",
+          period: "2024",
+          overview:
+            "Concepção e lançamento de solução conversacional (WhatsApp e Webchat) para automação de atendimento em grande rede varejista de farmácias.",
+          challenge:
+            "Alto volume de atendimento humano repetitivo sobre estoque, medicamentos e pedidos, gerando filas de espera e um TMA médio de 5 minutos.",
+          solution:
+            "Mapeamento de fluxos conversacionais no FigJam/Figma, UX Writing orientado ao tom de voz farmacêutico e integração de inteligência conversacional (NLU via IBM Watson).",
+          results: [
+            "Redução de 60% no Tempo Médio de Atendimento (TMA de 5 para 2 minutos)",
+            "Automação de mais de 70% das dúvidas frequentes de balcão",
+            "Hand-off otimizado para atendentes humanos em casos complexos",
+          ],
         },
         {
-          title: "Agente de IA (Em construção 🚧)",
+          id: "agente-ia",
+          title: "Agente de IA de Onboarding",
+          subtitle: "Automação de UX & IA Generativa (AI First)",
           description:
             "Criação de um agente de IA focado em apoiar novos colaboradores no processo de Onboarding de uma empresa.",
-          tags: ["IA Generativa", "UX Design", "Documentação"],
+          tags: ["IA Generativa", "UX Design", "Agentes de IA"],
+          role: "UX Designer & Desenvolvedor do Agente",
+          period: "2025",
+          overview:
+            "Desenvolvimento de assistente inteligente customizado para automação de rotinas de onboarding e aceleração de diagnósticos de UX.",
+          challenge:
+            "Processo manual e descentralizado de onboarding de novos colaboradores, consumindo alto tempo das equipes de design e produto.",
+          solution:
+            "Criação de agente de IA com integração à API do Gemini, base de conhecimento estruturada e fluxos conversacionais para esclarecimento de dúvidas e boas práticas.",
+          results: [
+            "Destaque de Melhor Documentação no Hackathon Zenvia",
+            "Redução significativa no tempo de rampa de novos integrantes",
+            "Multiplicação da cultura AI First na squad",
+          ],
+        },
+        {
+          id: "souamigu",
+          title: "Plataforma SouAmiGU",
+          subtitle: "Plataforma Web 0 to 1 para Gestão de Hackathons",
+          description:
+            "Concepção 0 to 1 da plataforma web para centralizar a gestão de hackathons, inscrições, formação de equipes e bancas examinadoras.",
+          tags: ["Product Design", "Design System", "Plataforma Web"],
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          overview:
+            "Design e arquitetura de produto de ponta a ponta para a plataforma web SouAmiGU do Instituto Amigu, unificando toda a jornada de eventos de inovação social.",
+          challenge:
+            "Operação de hackathons dispersa em formulários e planilhas desconectadas, causando ruídos de comunicação entre participantes, mentores e jurados.",
+          solution:
+            "Criação do Design System do projeto, prototipagem navegável em alta fidelidade no Figma e mapeamento de jornadas completas para administradores e participantes.",
+          results: [
+            "Projeto entregue e documentado em ciclo de 4 meses",
+            "Centralização de 100% dos fluxos de inscrição, submissão e avaliação",
+            "Validação técnica prévia de viabilidade junto a desenvolvedores",
+          ],
         },
       ],
     },
@@ -261,22 +337,89 @@ export const TRANSLATIONS = {
       viewAllBehance: "View all projects on Behance",
       items: [
         {
+          id: "skoob",
           title: "Skoob Redesign",
+          subtitle: "UX Research & Reading Communities",
           description:
             "UX Research study aiming to understand reader behavior and design the new reading communities feature for Skoob.",
           tags: ["UX Research", "UX Design", "Communities"],
+          role: "Lead UX Researcher & Product Designer",
+          period: "2024",
+          overview:
+            "UX Design and information architecture study focused on modernizing Brazil's largest reader social network (Skoob), empowering reading communities and book discovery.",
+          challenge:
+            "Skoob app suffered from low retention in reading groups and fragmented navigation between virtual bookshelf and social feed.",
+          solution:
+            "Qualitative research with readers, journey mapping, high-fidelity prototyping, and architecture of a seamless reading group ecosystem.",
+          results: [
+            "New intuitive flow for reading clubs & communities",
+            "High-fidelity navigable prototype in Figma",
+            "Validated through reader usability testing",
+          ],
+          behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
         },
         {
-          title: "Forbi Pharmacies - Customer Journey (Under construction 🚧)",
+          id: "farmacias-forbi",
+          title: "Forbi Pharmacies",
+          subtitle: "Conversational Automation & 60% AHT Reduction",
           description:
             "Conversational flow for a major pharmacy chain to automate customer journeys and reduce average handle time.",
           tags: ["UX Design", "Chatbots", "Conversational Design"],
+          role: "UX/UI Designer & Conversational Designer",
+          period: "2024",
+          overview:
+            "Design and launch of a conversational customer service solution (WhatsApp & Webchat) for a large retail pharmacy chain.",
+          challenge:
+            "High volume of repetitive human agent support regarding inventory and orders, causing long queues and an average handle time of 5 minutes.",
+          solution:
+            "Conversational flow mapping in FigJam/Figma, tone-aligned UX Writing, and NLU integration via IBM Watson.",
+          results: [
+            "60% reduction in Average Handling Time (from 5 to 2 mins)",
+            "Automation of 70%+ frequent store inquiries",
+            "Optimized agent hand-off for complex cases",
+          ],
         },
         {
-          title: "AI Agent (Under construction 🚧)",
+          id: "agente-ia",
+          title: "Onboarding AI Agent",
+          subtitle: "UX Automation & Generative AI (AI First)",
           description:
             "AI Agent designed to assist new hires during the corporate employee onboarding process.",
-          tags: ["Generative AI", "UX Design", "Documentation"],
+          tags: ["Generative AI", "UX Design", "AI Agents"],
+          role: "UX Designer & Agent Developer",
+          period: "2025",
+          overview:
+            "Custom intelligent assistant for automating onboarding workflows and accelerating UX diagnostic tasks.",
+          challenge:
+            "Manual and fragmented employee onboarding consuming significant time from design and product leads.",
+          solution:
+            "AI Agent built with Gemini API integration, structured knowledge base, and interactive FAQ flows.",
+          results: [
+            "Awarded Best Documentation at Zenvia AI Hackathon",
+            "Accelerated ramp-up time for new team members",
+            "Expanded AI-first culture across squad",
+          ],
+        },
+        {
+          id: "souamigu",
+          title: "SouAmiGU Platform",
+          subtitle: "0 to 1 Web Platform for Hackathon Management",
+          description:
+            "End-to-end 0 to 1 web platform design to centralize hackathons, registrations, team formation, and jury evaluation.",
+          tags: ["Product Design", "Design System", "Web Platform"],
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          overview:
+            "End-to-end product design for Instituto Amigu's SouAmiGU web platform, unifying the entire social innovation event lifecycle.",
+          challenge:
+            "Hackathon operations fragmented across spreadsheets and forms, creating friction for participants, mentors, and judges.",
+          solution:
+            "Design System creation, high-fidelity interactive prototyping in Figma, and complete user journey mapping.",
+          results: [
+            "Delivered and documented in a 4-month cycle",
+            "Centralized 100% of registration, submission, and grading flows",
+            "Prior technical feasibility validation with engineering",
+          ],
         },
       ],
     },
