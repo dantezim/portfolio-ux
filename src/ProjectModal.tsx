@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { X, ExternalLink, CheckCircle2, Sparkles } from "lucide-react";
+import { X, ExternalLink, CheckCircle2, Sparkles, Search, Lightbulb, Target } from "lucide-react";
 import type { ProjectTranslation, Language } from "./i18n/translations";
 
 interface ProjectModalProps {
@@ -41,19 +41,19 @@ export default function ProjectModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-y-auto animate-fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-project-title"
     >
-      {/* Modal Dialog Box */}
+      {/* Modal Dialog Box - Clean White Theme */}
       <div
-        className="bg-[#181b20] border border-white/15 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl text-left relative flex flex-col my-auto text-white"
+        className="bg-white border border-[#e2e4f0] rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl text-left relative flex flex-col my-auto text-[#1c1b1b]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Cover Banner */}
-        <div className="relative h-56 md:h-72 w-full overflow-hidden shrink-0 bg-gray-800">
+        <div className="relative h-56 md:h-72 w-full overflow-hidden shrink-0 bg-gray-100">
           {image ? (
             <img
               src={image}
@@ -62,15 +62,15 @@ export default function ProjectModal({
             />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${gradientColor} flex items-center justify-center`}>
-              <Sparkles className="w-16 h-16 text-white/30" />
+              <Sparkles className="w-16 h-16 text-white/40" />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181b20] via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 p-2.5 bg-black/60 hover:bg-black/90 backdrop-blur-md text-white rounded-full transition-all border border-white/20 cursor-pointer"
+            className="absolute top-4 right-4 z-20 p-2.5 bg-white/90 hover:bg-white text-[#1c1b1b] rounded-full transition-all shadow-md border border-gray-200 cursor-pointer"
             aria-label={isPt ? "Fechar modal" : "Close modal"}
           >
             <X size={20} />
@@ -83,7 +83,7 @@ export default function ProjectModal({
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-black/60 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full border border-white/20"
+                    className="bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
                   >
                     {tag}
                   </span>
@@ -99,110 +99,151 @@ export default function ProjectModal({
           </div>
         </div>
 
-        {/* Content Body */}
-        <div className="p-6 md:p-10 space-y-8">
+        {/* Content Body - White Background */}
+        <div className="p-6 md:p-10 space-y-8 bg-white">
           {/* Subtitle */}
           {project.subtitle && (
-            <p className="text-xl text-[#a4b1ff] font-semibold leading-snug">
+            <p className="text-xl text-[#5b68f5] font-semibold leading-snug">
               {project.subtitle}
             </p>
           )}
 
-          <div className="grid md:grid-cols-3 gap-6 bg-white/[0.03] border border-white/10 rounded-2xl p-5 text-sm">
+          {/* Project Details Grid */}
+          <div className="grid md:grid-cols-3 gap-6 bg-[#f8f9fc] border border-[#e2e4f0] rounded-2xl p-5 text-sm">
             {project.role && (
               <div>
-                <p className="text-white/50 uppercase text-xs font-semibold tracking-wider mb-1">
+                <p className="text-[#6c727f] uppercase text-xs font-bold tracking-wider mb-1">
                   {isPt ? "Papel" : "Role"}
                 </p>
-                <p className="text-white font-medium">{project.role}</p>
+                <p className="text-[#1c1b1b] font-semibold">{project.role}</p>
               </div>
             )}
             {project.period && (
               <div>
-                <p className="text-white/50 uppercase text-xs font-semibold tracking-wider mb-1">
+                <p className="text-[#6c727f] uppercase text-xs font-bold tracking-wider mb-1">
                   {isPt ? "Período" : "Period"}
                 </p>
-                <p className="text-white font-medium">{project.period}</p>
+                <p className="text-[#1c1b1b] font-semibold">{project.period}</p>
               </div>
             )}
             <div>
-              <p className="text-white/50 uppercase text-xs font-semibold tracking-wider mb-1">
+              <p className="text-[#6c727f] uppercase text-xs font-bold tracking-wider mb-1">
                 {isPt ? "Área" : "Category"}
               </p>
-              <p className="text-white font-medium">{project.tags.join(" • ")}</p>
+              <p className="text-[#1c1b1b] font-semibold">{project.tags.join(" • ")}</p>
             </div>
           </div>
 
-          {/* Overview */}
+          {/* Visão Geral (Overview) */}
           {project.overview && (
             <div>
-              <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#5b68f5]" />
+              <h3 className="text-lg font-bold text-[#1c1b1b] mb-3 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#5b68f5]" />
                 {isPt ? "Visão Geral" : "Overview"}
               </h3>
-              <p className="text-[#ccd4d4] text-base leading-relaxed">
+              <p className="text-[#494a4c] text-base leading-relaxed">
                 {project.overview}
               </p>
             </div>
           )}
 
-          {/* Challenge & Solution Grid */}
+          {/* Desafio e Solução */}
           <div className="grid md:grid-cols-2 gap-6">
             {project.challenge && (
-              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6">
-                <h3 className="text-base font-bold text-[#f87171] mb-2">
+              <div className="bg-[#fff5f5] border border-[#fecaca] rounded-2xl p-6">
+                <h3 className="text-base font-bold text-[#b91c1c] mb-2 flex items-center gap-2">
+                  <Target size={18} className="text-[#dc2626]" />
                   {isPt ? "O Desafio" : "The Challenge"}
                 </h3>
-                <p className="text-[#a4adae] text-sm leading-relaxed">
+                <p className="text-[#450a0a] text-sm leading-relaxed">
                   {project.challenge}
                 </p>
               </div>
             )}
 
             {project.solution && (
-              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6">
-                <h3 className="text-base font-bold text-[#6fe399] mb-2">
+              <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-6">
+                <h3 className="text-base font-bold text-[#15803d] mb-2 flex items-center gap-2">
+                  <Sparkles size={18} className="text-[#16a34a]" />
                   {isPt ? "A Solução" : "The Solution"}
                 </h3>
-                <p className="text-[#a4adae] text-sm leading-relaxed">
+                <p className="text-[#14532d] text-sm leading-relaxed">
                   {project.solution}
                 </p>
               </div>
             )}
           </div>
 
-          {/* Key Deliverables & Results */}
-          {project.results && project.results.length > 0 && (
-            <div>
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#6822c9]" />
-                {isPt ? "Resultados & Impacto" : "Results & Impact"}
+          {/* Metodologia de Pesquisa (se presente) */}
+          {project.methodology && project.methodology.length > 0 && (
+            <div className="bg-[#f8f9fc] border border-[#e2e4f0] rounded-2xl p-6">
+              <h3 className="text-lg font-bold text-[#1c1b1b] mb-4 flex items-center gap-2">
+                <Search size={20} className="text-[#5b68f5]" />
+                {isPt ? "Metodologia de Pesquisa" : "Research Methodology"}
               </h3>
               <ul className="grid md:grid-cols-2 gap-3">
-                {project.results.map((res, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-3 bg-white/[0.03] border border-white/10 rounded-xl p-4 text-sm text-[#d0d7de]"
-                  >
-                    <CheckCircle2 size={18} className="text-[#5b68f5] shrink-0 mt-0.5" />
-                    <span>{res}</span>
+                {project.methodology.map((m, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-sm text-[#334155]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5b68f5] mt-2 shrink-0" />
+                    <span>{m}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Behance Link Option */}
+          {/* Insights Chave de Usuários (se presente) */}
+          {project.insights && project.insights.length > 0 && (
+            <div>
+              <h3 className="text-lg font-bold text-[#1c1b1b] mb-4 flex items-center gap-2">
+                <Lightbulb size={20} className="text-[#6822c9]" />
+                {isPt ? "Principais Descobertas com Usuários" : "Key User Insights"}
+              </h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                {project.insights.map((ins, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#faf5ff] border border-[#e9d5ff] rounded-2xl p-5 text-sm text-[#581c87] font-medium leading-relaxed"
+                  >
+                    "{ins}"
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Resultados & Impacto */}
+          {project.results && project.results.length > 0 && (
+            <div>
+              <h3 className="text-lg font-bold text-[#1c1b1b] mb-4 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#6822c9]" />
+                {isPt ? "Resultados & Entregáveis" : "Results & Deliverables"}
+              </h3>
+              <ul className="grid md:grid-cols-2 gap-3">
+                {project.results.map((res, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-3 bg-[#f8f9fc] border border-[#e2e4f0] rounded-xl p-4 text-sm text-[#334155]"
+                  >
+                    <CheckCircle2 size={18} className="text-[#5b68f5] shrink-0 mt-0.5" />
+                    <span className="font-medium">{res}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Behance Link Button */}
           {project.behanceUrl && (
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4 flex-wrap">
-              <p className="text-white/60 text-sm">
-                {isPt ? "Quer ver a documentação visual completa?" : "Want to view the full visual presentation?"}
+            <div className="pt-6 border-t border-[#e2e4f0] flex items-center justify-between gap-4 flex-wrap">
+              <p className="text-[#6c727f] text-sm font-medium">
+                {isPt ? "Quer explorar a apresentação visual completa?" : "Want to view the full presentation?"}
               </p>
               <a
                 href={project.behanceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-5 py-2.5 rounded-xl transition-all text-sm"
+                className="brand-gradient inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-all shadow-md shadow-[#5b68f5]/20 text-sm cursor-pointer"
               >
                 <ExternalLink size={16} />
                 {isPt ? "Ver no Behance" : "View on Behance"}

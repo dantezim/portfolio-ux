@@ -11,6 +11,8 @@ export interface ProjectTranslation {
   overview?: string;
   challenge?: string;
   solution?: string;
+  methodology?: string[];
+  insights?: string[];
   results?: string[];
   behanceUrl?: string;
 }
@@ -68,22 +70,35 @@ export const TRANSLATIONS = {
         {
           id: "skoob",
           title: "Redesign do Skoob",
-          subtitle: "Pesquisa de UX & Comunidades de Leitura",
+          subtitle: "Pesquisa de Campo, Análise Qualitativa & Clube do Livro Assíncrono",
           description:
-            "Pesquisa de UX com o objetivo de entender o comportamento dos leitores e desenhar a nova funcionalidade de comunidades de leitura no Skoob.",
-          tags: ["UX Research", "UX Design", "Comunidades"],
-          role: "Lead UX Researcher & Product Designer",
+            "Pesquisa de campo e UX Design para transformar a experiência social do Skoob, criando a funcionalidade de clubes de leitura assíncronos.",
+          tags: ["UX Research", "UX Design", "Comunidades", "Figma"],
+          role: "UX Researcher & Product Designer",
           period: "2024",
           overview:
-            "Estudo de UX Design e arquitetura da informação voltado para a modernização da maior rede social de leitores do Brasil (Skoob), focando no fortalecimento de comunidades de leitura e descoberta de livros.",
+            "Estudo aprofundado de UX Research focado no comportamento de leitores assíduos do Skoob. Identificamos que a plataforma é utilizada primariamente como estante/registro virtual, mas que o engajamento social migra para WhatsApp, Instagram e TikTok. A partir dessa dor, projetamos o recurso de Clubes do Livro Assíncronos por metas e capítulos.",
           challenge:
-            "O aplicativo do Skoob apresentava baixa retenção em grupos de leitura e uma navegação fragmentada entre a estante virtual e o feed social.",
+            "Os usuários sofriam com a desorganização de grupos no WhatsApp (mensagens importantes perdidas rapidamente) e a rigidez de encontros síncronos ao vivo com hora marcada, incompatíveis com rotinas corridas. O Skoob não oferecia recursos para conversas estruturadas e sem spoilers.",
           solution:
-            "Condução de pesquisas qualitativas com leitores, mapeamento de jornadas, criação de protótipos de alta fidelidade e arquitetura de um ecossistema fluido para grupos de leitura.",
+            "Estruturação de pesquisa qualitativa semiestruturada remota (entrevistas em profundidade com leitores de 24 a 45 anos), desenvolvimento de Proto Personas (Júlia - 24 anos e Silvia - 45 anos), Matriz CSD e Mapa de Afinidade no FigJam. Desenhamos a funcionalidade de Clubes do Livro Assíncronos por metas de capítulos com fóruns de debate por tópico.",
+          methodology: [
+            "Entrevistas Qualitativas Semiestruturadas (Amostra de 24 a 45 anos)",
+            "Matriz CSD (Certezas, Suposições e Dúvidas)",
+            "Proto Personas, Proto Jornadas e Mapa de Empatia (Persona Mariana)",
+            "Mapa de Afinidade & Análise Temática de Dores",
+            "Mapeamento de Jornada do Usuário & User Stories",
+          ],
+          insights: [
+            "O Skoob é usado pra registrar leituras, mas os usuários sempre saem do app na hora de conversar e socializar.",
+            "Discussões precisam ser assíncronas por capítulos, permitindo trocas profundas sem a obrigação de reuniões ao vivo.",
+            "A experiência comunitária se torna mais rica quando prioriza o círculo social próximo (redes de confiança).",
+          ],
           results: [
-            "Novo fluxo intuitivo para grupos e clubes de leitura",
-            "Prototipagem em alta fidelidade navegável no Figma",
-            "Validação com leitores e testes de usabilidade",
+            "Conclusão Estratégica: A oportunidade do Skoob é transformar-se em uma plataforma de conexão assíncrona baseada em redes de confiança.",
+            "Arquitetura de Clubes de Leitura Assíncronos por metas de capítulos e alertas de spoiler",
+            "Criação do fluxo completo de UX/UI e protótipo navegável de alta fidelidade no Figma",
+            "Aumento da taxa de retenção estimada e engajamento contínuo de leitores no aplicativo",
           ],
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
         },
@@ -339,22 +354,35 @@ export const TRANSLATIONS = {
         {
           id: "skoob",
           title: "Skoob Redesign",
-          subtitle: "UX Research & Reading Communities",
+          subtitle: "Field Research, Qualitative Analysis & Asynchronous Book Club",
           description:
-            "UX Research study aiming to understand reader behavior and design the new reading communities feature for Skoob.",
-          tags: ["UX Research", "UX Design", "Communities"],
-          role: "Lead UX Researcher & Product Designer",
+            "UX Research and product design study transforming Skoob's social experience through asynchronous book club features.",
+          tags: ["UX Research", "UX Design", "Communities", "Figma"],
+          role: "UX Researcher & Product Designer",
           period: "2024",
           overview:
-            "UX Design and information architecture study focused on modernizing Brazil's largest reader social network (Skoob), empowering reading communities and book discovery.",
+            "In-depth UX research study examining avid reader behavior on Skoob. We discovered that while users register books on Skoob, social discussions bleed into WhatsApp, Instagram, and TikTok. Based on this friction, we designed an Asynchronous Book Club feature with chapter goals.",
           challenge:
-            "Skoob app suffered from low retention in reading groups and fragmented navigation between virtual bookshelf and social feed.",
+            "Readers struggled with disorganized WhatsApp groups (where key messages got lost quickly) and rigid live scheduled meetings incompatible with busy routines. Skoob lacked structured, spoiler-free discussion spaces.",
           solution:
-            "Qualitative research with readers, journey mapping, high-fidelity prototyping, and architecture of a seamless reading group ecosystem.",
+            "Qualitative research with remote video interviews (participants aged 24-45), Proto Personas, CSD Matrix, and Affinity Mapping in FigJam. We designed an Asynchronous Book Club experience with chapter goals and topic-focused discussion forums.",
+          methodology: [
+            "Semi-Structured Qualitative Interviews (Participants aged 24-45)",
+            "CSD Matrix (Certainties, Suppositions, Doubts)",
+            "Proto Personas, Proto Journeys & Empathy Map (Persona Mariana)",
+            "Affinity Mapping & Thematic Pain Point Analysis",
+            "User Journey Mapping & User Stories",
+          ],
+          insights: [
+            "Users open Skoob to record books, but leave the app to socialize on external platforms.",
+            "Discussions must be asynchronous by chapter, enabling deep exchanges without mandatory live calls.",
+            "Community experience is richer when prioritizing users' primary social circles of trust.",
+          ],
           results: [
-            "New intuitive flow for reading clubs & communities",
-            "High-fidelity navigable prototype in Figma",
-            "Validated through reader usability testing",
+            "Strategic Conclusion: Skoob's opportunity is transforming into an asynchronous trust-network connection platform.",
+            "Asynchronous Book Club architecture with chapter goals and spoiler alerts",
+            "End-to-end UX/UI flow & high-fidelity interactive prototype in Figma",
+            "Increased estimated retention and continuous reader engagement",
           ],
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
         },
