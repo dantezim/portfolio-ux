@@ -88,9 +88,9 @@ export default function AllProjectsModal({
 
         {/* Body Grid of Projects */}
         <div className="p-6 md:p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#f8f9fc]">
-          {projects.map((p, idx) => {
-            const image = projectImages[idx];
-            const color = projectColors[idx % projectColors.length];
+          {projects?.map((p, idx) => {
+            const image = projectImages?.[idx];
+            const color = projectColors?.[idx % (projectColors?.length || 1)] || "from-[#5b68f5] to-[#2b49aa]";
             const canOpenModal = p.hasModal !== false;
 
             return (
@@ -123,7 +123,7 @@ export default function AllProjectsModal({
                     </div>
                   )}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
-                    {p.tags.map((t) => (
+                    {p.tags?.map((t) => (
                       <span
                         key={t}
                         className="bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-0.5 rounded-full border border-white/20"

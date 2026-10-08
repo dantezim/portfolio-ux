@@ -80,7 +80,7 @@ export default function ProjectModal({
           <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-end justify-between gap-4">
             <div>
               <div className="flex flex-wrap gap-2 mb-2">
-                {project.tags.map((tag) => (
+                {project.tags?.map((tag) => (
                   <span
                     key={tag}
                     className="bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
