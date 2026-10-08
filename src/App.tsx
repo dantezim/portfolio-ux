@@ -7,6 +7,7 @@ import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProjectModal from "./ProjectModal";
+import AllProjectsModal from "./AllProjectsModal";
 import { TRANSLATIONS, type Language, type ProjectTranslation } from "./i18n/translations";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
@@ -242,6 +243,7 @@ function ProjectsSection({ lang }: SectionProps) {
   const [activeProject, setActiveProject] = useState<ProjectTranslation | null>(null);
   const [activeImage, setActiveImage] = useState<string | undefined>(undefined);
   const [activeColor, setActiveColor] = useState<string | undefined>(undefined);
+  const [isAllProjectsOpen, setIsAllProjectsOpen] = useState(false);
 
   const tProjects = TRANSLATIONS[lang].projectsSection;
 
@@ -254,11 +256,16 @@ function ProjectsSection({ lang }: SectionProps) {
     "from-[#10783b] to-[#2b49aa]",
   ];
 
-  const handleOpenModal = (p: ProjectTranslation, image?: string, color?: string) => {
-    setActiveProject(p);
-    setActiveImage(image);
-    setActiveColor(color);
+  const handleOpenProjectModal = (p: ProjectTranslation, image?: string, color?: string) => {
+    if (p.hasModal !== false) {
+      setActiveProject(p);
+      setActiveImage(image);
+      setActiveColor(color);
+    }
   };
+
+  const featuredProjects = tProjects.items.slice(0, 3);
+  const isPt = lang === "pt";
 
   return (
     <section id="projetos" className="py-20 px-6 lg:px-16 bg-white/60">
@@ -280,26 +287,36 @@ function ProjectsSection({ lang }: SectionProps) {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
-          {tProjects.items.map((p, idx) => {
+        {/* Home Page Featured 3 Projects (Frame 4) */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {featuredProjects.map((p, idx) => {
             const image = projectImages[idx];
             const color = projectColors[idx % projectColors.length];
+            const canOpenModal = p.hasModal !== false;
 
             return (
               <article
                 key={p.id || p.title}
-                onClick={() => handleOpenModal(p, image, color)}
-                className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer"
+                onClick={() => handleOpenProjectModal(p, image, color)}
+                className={`group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden transition-all duration-300 flex flex-col ${
+                  canOpenModal
+                    ? "hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                    : "opacity-95"
+                }`}
               >
                 <div className="block relative h-48 overflow-hidden bg-gray-100">
                   {image ? (
                     <img
                       src={image}
                       alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
+                        canOpenModal ? "group-hover:scale-105" : ""
+                      }`}
                     />
                   ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${color}`} />
+                    <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center`}>
+                      <Sparkles className="w-12 h-12 text-white/30" />
+                    </div>
                   )}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
                     {p.tags.map((t) => (
@@ -314,46 +331,77 @@ function ProjectsSection({ lang }: SectionProps) {
                 </div>
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug group-hover:text-[#5b68f5] transition-colors">
+                    <h3
+                      className={`font-bold text-[#1c1b1b] text-lg mb-2 leading-snug ${
+                        canOpenModal ? "group-hover:text-[#5b68f5] transition-colors" : ""
+                      }`}
+                    >
                       {p.title}
                     </h3>
                     <p className="text-[#494a4c] text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenModal(p, image, color);
-                    }}
-                    className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto self-start cursor-pointer"
-                  >
-                    {tProjects.viewCaseStudy}
-                  </button>
+
+                  {canOpenModal ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenProjectModal(p, image, color);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto self-start cursor-pointer"
+                    >
+                      {tProjects.viewCaseStudy}
+                    </button>
+                  ) : (
+                    <span className="inline-block text-xs font-semibold text-[#94a3b8] bg-[#f1f5f9] px-2.5 py-1 rounded-md mt-auto self-start">
+                      {isPt ? "Em breve 🚧" : "Coming soon 🚧"}
+                    </span>
+                  )}
                 </div>
               </article>
             );
           })}
         </div>
 
-        <div className="text-center mt-10">
+        {/* 'Ver todos os projetos' CTA Button (Frame 4) */}
+        <div className="text-center mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={() => setIsAllProjectsOpen(true)}
+            className="brand-gradient text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px] cursor-pointer"
+          >
+            {isPt ? "Ver todos os projetos" : "View all projects"}
+          </button>
           <a
             href={BEHANCE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="brand-gradient inline-block text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px]"
+            className="border-2 border-[#5b68f5] text-[#2b49aa] font-bold px-8 py-3 rounded-2xl hover:bg-[#5b68f5]/5 transition-all text-sm"
           >
             {tProjects.viewAllBehance}
           </a>
         </div>
       </div>
 
-      {/* Case Study Modal */}
+      {/* Case Study Modal (Skoob / Duolingo) */}
       <ProjectModal
         project={activeProject}
         image={activeImage}
         gradientColor={activeColor}
         lang={lang}
         onClose={() => setActiveProject(null)}
+      />
+
+      {/* Frame 5: All Projects Grid Modal */}
+      <AllProjectsModal
+        isOpen={isAllProjectsOpen}
+        projects={tProjects.items}
+        projectImages={projectImages}
+        projectColors={projectColors}
+        lang={lang}
+        onClose={() => setIsAllProjectsOpen(false)}
+        onSelectProject={(p, image, color) => {
+          handleOpenProjectModal(p, image, color);
+        }}
       />
     </section>
   );

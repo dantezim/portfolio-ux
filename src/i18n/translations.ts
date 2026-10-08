@@ -15,6 +15,7 @@ export interface ProjectTranslation {
   insights?: string[];
   results?: string[];
   behanceUrl?: string;
+  hasModal?: boolean;
 }
 
 export interface ExperienceTranslation {
@@ -101,6 +102,7 @@ export const TRANSLATIONS = {
             "Aumento da taxa de retenção estimada e engajamento contínuo de leitores no aplicativo",
           ],
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+          hasModal: true,
         },
         {
           id: "duolingo",
@@ -136,6 +138,7 @@ export const TRANSLATIONS = {
             "Identificação da maior etapa de fricção (-29,2% no nivelamento) e validação da opção de pular",
             "Elaboração de Backlog priorizado por impacto vs esforço e Scorecard de IA para o próximo ciclo de experimentos",
           ],
+          hasModal: true,
         },
         {
           id: "farmacias-forbi",
@@ -157,6 +160,7 @@ export const TRANSLATIONS = {
             "Automação de mais de 70% das dúvidas frequentes de balcão",
             "Hand-off otimizado para atendentes humanos em casos complexos",
           ],
+          hasModal: false,
         },
         {
           id: "agente-ia",
@@ -178,6 +182,7 @@ export const TRANSLATIONS = {
             "Redução significativa no tempo de rampa de novos integrantes",
             "Multiplicação da cultura AI First na squad",
           ],
+          hasModal: false,
         },
         {
           id: "souamigu",
@@ -199,6 +204,7 @@ export const TRANSLATIONS = {
             "Centralização de 100% dos fluxos de inscrição, submissão e avaliação",
             "Validação técnica prévia de viabilidade junto a desenvolvedores",
           ],
+          hasModal: false,
         },
       ],
     },
@@ -420,6 +426,7 @@ export const TRANSLATIONS = {
             "Increased estimated retention and continuous reader engagement",
           ],
           behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+          hasModal: true,
         },
         {
           id: "duolingo",
@@ -455,6 +462,7 @@ export const TRANSLATIONS = {
             "Pinpointed placement test friction (-29.2% drop) and validated shortcut autonomy",
             "Delivered an impact vs. effort prioritized backlog and AI Scorecard for next iteration cycles",
           ],
+          hasModal: true,
         },
         {
           id: "farmacias-forbi",
@@ -476,6 +484,7 @@ export const TRANSLATIONS = {
             "Automation of 70%+ frequent store inquiries",
             "Optimized agent hand-off for complex cases",
           ],
+          hasModal: false,
         },
         {
           id: "agente-ia",
@@ -497,6 +506,7 @@ export const TRANSLATIONS = {
             "Accelerated ramp-up time for new team members",
             "Expanded AI-first culture across squad",
           ],
+          hasModal: false,
         },
         {
           id: "souamigu",
@@ -518,6 +528,7 @@ export const TRANSLATIONS = {
             "Centralized 100% of registration, submission, and grading flows",
             "Prior technical feasibility validation with engineering",
           ],
+          hasModal: false,
         },
       ],
     },
