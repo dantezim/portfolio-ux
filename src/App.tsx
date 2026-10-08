@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Download, ArrowUp } from "lucide-react";
+import { Download, ArrowUp, Sparkles } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
 import imgSkoob from "./assets/skoob-cover.png";
 import imgDuolingo from "./assets/duolingo-cover.png";
