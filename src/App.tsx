@@ -247,6 +247,17 @@ function ProjectsSection({ lang }: SectionProps) {
 
   const tProjects = TRANSLATIONS[lang].projectsSection;
 
+  useEffect(() => {
+    if (activeProject || isAllProjectsOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeProject, isAllProjectsOpen]);
+
   const projectImages: (string | undefined)[] = [imgSkoob, imgDuolingo, undefined, undefined, undefined];
   const projectColors = [
     "from-[#5b68f5] to-[#2b49aa]",

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { X, Sparkles, FolderKanban } from "lucide-react";
+import { X, Sparkles } from "lucide-react";
 import type { ProjectTranslation, Language } from "./i18n/translations";
 
 interface AllProjectsModalProps {
@@ -30,11 +30,9 @@ export default function AllProjectsModal({
       }
     };
 
-    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -58,23 +56,18 @@ export default function AllProjectsModal({
       >
         {/* Header */}
         <div className="p-6 md:p-8 border-b border-[#e2e4f0] flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-md z-20">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#5b68f5]/10 border border-[#5b68f5]/20 flex items-center justify-center text-[#5b68f5]">
-              <FolderKanban size={20} />
-            </div>
-            <div>
-              <h2
-                id="all-projects-title"
-                className="font-['IBM_Plex_Mono',monospace] font-bold text-2xl md:text-3xl text-[#1c1b1b] tracking-tight uppercase"
-              >
-                {isPt ? "Todos os Projetos" : "All Projects"}
-              </h2>
-              <p className="text-sm text-[#6c727f]">
-                {isPt
-                  ? "Explore a lista completa de cases e iniciativas de design"
-                  : "Explore the full collection of design cases and projects"}
-              </p>
-            </div>
+          <div>
+            <h2
+              id="all-projects-title"
+              className="font-['IBM_Plex_Mono',monospace] font-bold text-2xl md:text-3xl text-[#1c1b1b] tracking-tight uppercase"
+            >
+              {isPt ? "Todos os Projetos" : "All Projects"}
+            </h2>
+            <p className="text-sm text-[#6c727f]">
+              {isPt
+                ? "Explore a lista completa de cases e iniciativas de design"
+                : "Explore the full collection of design cases and projects"}
+            </p>
           </div>
 
           <button
