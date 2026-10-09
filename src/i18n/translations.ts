@@ -15,6 +15,8 @@ export interface ProjectTranslation {
   insights?: string[];
   results?: string[];
   behanceUrl?: string;
+  externalUrl?: string;
+  externalUrlLabel?: string;
   hasModal?: boolean;
 }
 
@@ -138,6 +140,8 @@ export const TRANSLATIONS = {
             "Identificação da maior etapa de fricção (-29,2% no nivelamento) e validação da opção de pular",
             "Elaboração de Backlog priorizado por impacto vs esforço e Scorecard de IA para o próximo ciclo de experimentos",
           ],
+          externalUrl: "https://ph-armada-nalis.github.io/case-duolingo-onboarding/",
+          externalUrlLabel: "Acessar Case Interativo",
           hasModal: true,
         },
         {
@@ -462,6 +466,8 @@ export const TRANSLATIONS = {
             "Pinpointed placement test friction (-29.2% drop) and validated shortcut autonomy",
             "Delivered an impact vs. effort prioritized backlog and AI Scorecard for next iteration cycles",
           ],
+          externalUrl: "https://ph-armada-nalis.github.io/case-duolingo-onboarding/",
+          externalUrlLabel: "Access Interactive Case Study",
           hasModal: true,
         },
         {
