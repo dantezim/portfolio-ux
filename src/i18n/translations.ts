@@ -1,9 +1,23 @@
 export type Language = "pt" | "en";
 
 export interface ProjectTranslation {
+  id: string;
   title: string;
+  subtitle?: string;
   description: string;
   tags: string[];
+  role?: string;
+  period?: string;
+  overview?: string;
+  challenge?: string;
+  solution?: string;
+  methodology?: string[];
+  insights?: string[];
+  results?: string[];
+  behanceUrl?: string;
+  externalUrl?: string;
+  externalUrlLabel?: string;
+  hasModal?: boolean;
 }
 
 export interface ExperienceTranslation {
@@ -44,9 +58,9 @@ export const TRANSLATIONS = {
       areasHeader: "Áreas de atuação",
       skills: ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"],
       stats: [
-        { val: "2+", label: "Anos exp." },
-        { val: "3+", label: "Projetos" },
-        { val: "3", label: "Empresas" },
+        { val: "-60%", label: "TMA" },
+        { val: "-20%", label: "Transbordo" },
+        { val: "+10%", label: "Retenção" },
       ],
     },
     projectsSection: {
@@ -57,22 +71,144 @@ export const TRANSLATIONS = {
       viewAllBehance: "Ver todos os projetos no Behance",
       items: [
         {
+          id: "skoob",
           title: "Redesign do Skoob",
+          subtitle: "Pesquisa de Campo, Análise Qualitativa & Clube do Livro Assíncrono",
           description:
-            "Pesquisa de UX com o objetivo de entender o comportamento dos leitores e desenhar a nova funcionalidade de comunidades de leitura no Skoob.",
-          tags: ["UX Research", "UX Design", "Comunidades"],
+            "Pesquisa de campo e UX Design para transformar a experiência social do Skoob, criando a funcionalidade de clubes de leitura assíncronos.",
+          tags: ["UX Research", "UX Design", "Comunidades", "Figma"],
+          role: "UX Researcher & Product Designer",
+          period: "2024",
+          overview:
+            "Estudo aprofundado de UX Research focado no comportamento de leitores assíduos do Skoob. Identificamos que a plataforma é utilizada primariamente como estante/registro virtual, mas que o engajamento social migra para WhatsApp, Instagram e TikTok. A partir dessa dor, projetamos o recurso de Clubes do Livro Assíncronos por metas e capítulos.",
+          challenge:
+            "Os usuários sofriam com a desorganização de grupos no WhatsApp (mensagens importantes perdidas rapidamente) e a rigidez de encontros síncronos ao vivo com hora marcada, incompatíveis com rotinas corridas. O Skoob não oferecia recursos para conversas estruturadas e sem spoilers.",
+          solution:
+            "Estruturação de pesquisa qualitativa semiestruturada remota (entrevistas em profundidade com leitores de 24 a 45 anos), desenvolvimento de Proto Personas (Júlia - 24 anos e Silvia - 45 anos), Matriz CSD e Mapa de Afinidade no FigJam. Desenhamos a funcionalidade de Clubes do Livro Assíncronos por metas de capítulos com fóruns de debate por tópico.",
+          methodology: [
+            "Entrevistas Qualitativas Semiestruturadas (Amostra de 24 a 45 anos)",
+            "Matriz CSD (Certezas, Suposições e Dúvidas)",
+            "Proto Personas, Proto Jornadas e Mapa de Empatia (Persona Mariana)",
+            "Mapa de Afinidade & Análise Temática de Dores",
+            "Mapeamento de Jornada do Usuário & User Stories",
+          ],
+          insights: [
+            "O Skoob é usado pra registrar leituras, mas os usuários sempre saem do app na hora de conversar e socializar.",
+            "Discussões precisam ser assíncronas por capítulos, permitindo trocas profundas sem a obrigação de reuniões ao vivo.",
+            "A experiência comunitária se torna mais rica quando prioriza o círculo social próximo (redes de confiança).",
+          ],
+          results: [
+            "Conclusão Estratégica: A oportunidade do Skoob é transformar-se em uma plataforma de conexão assíncrona baseada em redes de confiança.",
+            "Arquitetura de Clubes de Leitura Assíncronos por metas de capítulos e alertas de spoiler",
+            "Criação do fluxo completo de UX/UI e protótipo navegável de alta fidelidade no Figma",
+            "Aumento da taxa de retenção estimada e engajamento contínuo de leitores no aplicativo",
+          ],
+          behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+          hasModal: true,
         },
         {
-          title: "Farmácias Forbi - Jornada de Atendimento (Em construção 🚧)",
+          id: "duolingo",
+          title: "Redesign do Onboarding Duolingo",
+          subtitle: "Análise de Fricção no Funil & Teste Remoto de Onboarding Enxuto",
+          description:
+            "Pesquisa de UX Analytics e proposta de redesign enxuto para reduzir o atrito e acelerar a conclusão da primeira lição no Duolingo.",
+          tags: ["UX Research", "UX Design", "Redesign", "Design System"],
+          role: "UX Analyst & Product Designer",
+          period: "Outubro / 2026",
+          overview:
+            "Estudo de UX Analytics e Redesign comportamental focado em otimizar o funil de onboarding do Duolingo (do cadastro até a conclusão da primeira lição). Analisamos o comportamento de 8.000 usuários em uma base sintética e conduzimos um teste remoto não moderado no Maze comparando o fluxo original com a nossa proposta enxuta.",
+          challenge:
+            "Metade dos novos usuários (50,2%) não concluía a primeira lição. A maior queda do funil acontecia no teste de nivelamento (-29,2% de perda). Além disso, no Android o fluxo acumulava 2,2 vezes mais erros por usuário do que no iOS (2,05 vs 0,94 erros) e exigia um cadastro de 3 telas logo na entrada.",
+          solution:
+            "Redesenho da jornada de onboarding no Figma, reduzindo o fluxo de 26 para 20 telas. Eliminamos 6 telas de transição e perguntas secundárias, adicionamos a funcionalidade 'Pular Nivelamento' para levar o usuário direto à prática e unificamos o cadastro em 1 tela simplificada.",
+          methodology: [
+            "Análise de Funil com Base Sintética de 8.000 usuários (Google Sheets)",
+            "Plano de Instrumentação de Métricas com 6 Eventos Rastreáveis",
+            "Análise Comparativa por Dispositivo (Android vs iOS)",
+            "Protótipos Navegáveis no Figma (Versão A: Controle x Versão B: Proposta Enxuta)",
+            "Teste Remoto Não Moderado no Maze (50 participantes / Análise pareada com 22 usuários)",
+            "Avaliação de Princípios Éticos e de IA via Scorecard Humanifesto",
+          ],
+          insights: [
+            "Tempo 44% mais rápido: Os usuários concluíram a primeira lição em 68 segundos na Versão B, contra 122 segundos no fluxo original A.",
+            "24% escolheram pular o nivelamento: Dar autonomia aos leitores/estudantes desobstrui a jornada inicial imediatamente.",
+            "Fricção no cadastro precoce: Exigir criação de conta ou login logo na entrada gerou resistência; o cadastro deve vir após o usuário sentir o valor da 1ª lição.",
+          ],
+          results: [
+            "Redução significativa no tempo mediano da primeira lição (de 122s para 68s no Maze)",
+            "Encurtamento do fluxo de onboarding de 26 para 20 telas no Figma",
+            "Identificação da maior etapa de fricção (-29,2% no nivelamento) e validação da opção de pular",
+            "Elaboração de Backlog priorizado por impacto vs esforço e Scorecard de IA para o próximo ciclo de experimentos",
+          ],
+          externalUrl: "https://ph-armada-nalis.github.io/case-duolingo-onboarding/",
+          externalUrlLabel: "Acessar Case Interativo",
+          hasModal: true,
+        },
+        {
+          id: "farmacias-forbi",
+          title: "Farmácias Forbi",
+          subtitle: "Automação Conversacional & Redução de 60% no TMA",
           description:
             "Fluxo conversacional para uma grande rede de farmácias, cujo objetivo era automatizar a jornada dos clientes e reduzir o TMA.",
           tags: ["UX Design", "Chatbots", "Design Conversacional"],
+          role: "UX/UI Designer & Conversational Designer",
+          period: "2024",
+          overview:
+            "Concepção e lançamento de solução conversacional (WhatsApp e Webchat) para automação de atendimento em grande rede varejista de farmácias.",
+          challenge:
+            "Alto volume de atendimento humano repetitivo sobre estoque, medicamentos e pedidos, gerando filas de espera e um TMA médio de 5 minutos.",
+          solution:
+            "Mapeamento de fluxos conversacionais no FigJam/Figma, UX Writing orientado ao tom de voz farmacêutico e integração de inteligência conversacional (NLU via IBM Watson).",
+          results: [
+            "Redução de 60% no Tempo Médio de Atendimento (TMA de 5 para 2 minutos)",
+            "Automação de mais de 70% das dúvidas frequentes de balcão",
+            "Hand-off otimizado para atendentes humanos em casos complexos",
+          ],
+          hasModal: false,
         },
         {
-          title: "Agente de IA (Em construção 🚧)",
+          id: "agente-ia",
+          title: "Agente de IA de Onboarding",
+          subtitle: "Automação de UX & IA Generativa (AI First)",
           description:
             "Criação de um agente de IA focado em apoiar novos colaboradores no processo de Onboarding de uma empresa.",
-          tags: ["IA Generativa", "UX Design", "Documentação"],
+          tags: ["IA Generativa", "UX Design", "Agentes de IA"],
+          role: "UX Designer & Desenvolvedor do Agente",
+          period: "2025",
+          overview:
+            "Desenvolvimento de assistente inteligente customizado para automação de rotinas de onboarding e aceleração de diagnósticos de UX.",
+          challenge:
+            "Processo manual e descentralizado de onboarding de novos colaboradores, consumindo alto tempo das equipes de design e produto.",
+          solution:
+            "Criação de agente de IA com integração à API do Gemini, base de conhecimento estruturada e fluxos conversacionais para esclarecimento de dúvidas e boas práticas.",
+          results: [
+            "Destaque de Melhor Documentação no Hackathon Zenvia",
+            "Redução significativa no tempo de rampa de novos integrantes",
+            "Multiplicação da cultura AI First na squad",
+          ],
+          hasModal: false,
+        },
+        {
+          id: "souamigu",
+          title: "Plataforma SouAmiGU",
+          subtitle: "Plataforma Web 0 to 1 para Gestão de Hackathons",
+          description:
+            "Concepção 0 to 1 da plataforma web para centralizar a gestão de hackathons, inscrições, formação de equipes e bancas examinadoras.",
+          tags: ["Product Design", "Design System", "Plataforma Web"],
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          overview:
+            "Design e arquitetura de produto de ponta a ponta para a plataforma web SouAmiGU do Instituto Amigu, unificando toda a jornada de eventos de inovação social.",
+          challenge:
+            "Operação de hackathons dispersa em formulários e planilhas desconectadas, causando ruídos de comunicação entre participantes, mentores e jurados.",
+          solution:
+            "Criação do Design System do projeto, prototipagem navegável em alta fidelidade no Figma e mapeamento de jornadas completas para administradores e participantes.",
+          results: [
+            "Projeto entregue e documentado em ciclo de 4 meses",
+            "Centralização de 100% dos fluxos de inscrição, submissão e avaliação",
+            "Validação técnica prévia de viabilidade junto a desenvolvedores",
+          ],
+          hasModal: false,
         },
       ],
     },
@@ -86,72 +222,89 @@ export const TRANSLATIONS = {
         {
           id: "zenvia",
           company: "Zenvia Mobile Services",
-          role: "UX Designer Pleno",
-          period: "2025 – 2026",
+          role: "Analista de Experiência do Usuário",
+          period: "09/2025 – 07/2026",
           badge: "Seguros & IA Generativa",
           isCurrent: true,
           description: [
-            "Atuação na evolução de produtos digitais e jornadas conversacionais, em parceria com equipes de Produto, Design e Tecnologia para uma grande empresa do segmento de Seguros.",
-            "Definição e acompanhamento de métricas de produto e experiência, utilizando dados de comportamento para orientar decisões e evoluções de jornadas digitais.",
-            "Estruturação de dashboards que apoiaram decisões de evolução do produto e monitoramento contínuo da experiência do usuário.",
-            "Condução de análises de comportamento do usuário para identificar oportunidades de melhoria e apoiar decisões de evolução do produto.",
-            "Contribuição na concepção de agentes de IA, definindo fluxos, regras de decisão e estratégias de interação apoiadas por IA Generativa.",
-            "Articulação com múltiplos stakeholders para definição de soluções digitais alinhadas aos objetivos de negócio.",
-            "Atuação em iniciativas de inovação utilizando Design Thinking, metodologias ágeis (Scrum) e ferramentas colaborativas para construção de soluções escaláveis.",
+            "Design de Jornadas & IA Estratégica: Concepção e estruturação de jornadas conversacionais de ponta a ponta (WhatsApp e Webchat), desde a criação de personas até fluxos de diálogo e árvores de decisão no Miro, integrando IA Generativa (Gemini) como suporte estratégico na tomada de decisão de UX para grande player de Seguros.",
+            "Métricas de Produto & Melhoria Contínua: Criação e padronização de métricas e KPIs de experiência através de Zenvia NLU e ferramentas de IA generativa (Gemini e Miro AI), mapeando pontos de atrito, taxas de abandono e gargalos de jornada para embasar decisões de produto e otimização contínua.",
+            "Agente de IA Especialista em UX: Desenvolvimento de um agente de IA customizado para automação de rotinas de UX na squad, agilizando etapas de discovery, diagnóstico rápido de atrito em fluxos conversacionais e geração automatizada de indicadores de performance.",
+            "Destaque em Hackathon & Iniciativa AI First: Reconhecimento com destaque de Melhor Documentação no Hackathon interno de agentes de IA, viabilizando melhores resultados para o time e atuando como multiplicador na implementação da estratégia corporativa AI First da Zenvia.",
           ],
           tags: [
             "Product Design",
             "UX Research",
-            "Product Metrics",
-            "Dashboards",
-            "IA Generativa",
-            "Agentes de IA",
+            "IA Generativa (Gemini)",
+            "Métricas & KPIs",
             "Design Conversacional",
-            "Scrum",
+            "Agentes de IA",
+            "Zenvia NLU",
           ],
         },
         {
           id: "resolv-jr",
-          company: "Resolv Tecnologia e Inovação LTDA",
-          role: "UX/UI Designer Junior",
-          period: "2024 – 2025",
+          company: "Resolv.AI (Resolv Tecnologia e Inovação)",
+          role: "UX/UI Designer",
+          period: "06/2024 – 06/2025",
           badge: "Saúde & Educação B2B",
           description: [
-            "Atuação na evolução contínua de produtos digitais escaláveis utilizados por clientes corporativos de diferentes segmentos, como saúde e educação, lado a lado com os stakeholders.",
-            "Desenvolvimento de interfaces de alta fidelidade.",
-            "Estruturação de jornadas digitais, aplicando UX Writing para aumentar a clareza das interações e reduzir ambiguidades na experiência.",
-            "Definição de fluxos de usuário.",
-            "Contribuição na concepção de testes de usabilidade para identificar problemas de uso e gerar insights para evolução do produto.",
-            "Análise de comportamento para direcionamento de melhorias.",
-            "Colaboração ativa entre Produto, Design e Desenvolvimento.",
+            "Design de Interfaces (UI) & Design System: Criação de interfaces visuais e protótipos navegáveis de alta fidelidade no Figma para plataformas B2B (Saúde e Educação), implementando componentes modulares, variantes, Auto Layout e handoff técnico detalhado com especificações de engenharia.",
+            "Jornadas Conversacionais & UX Writing: Concepção de jornadas conversacionais completas (WhatsApp e Webchat) no FigJam/Figma, realizando mapeamento de fluxos, árvores de decisão e UX Writing orientado ao tom de voz do produto, integrando fluxos de NLP/NLU via IBM Watson.",
+            "Curadoria Orientada a Dados: Liderança na rotina de curadoria analítica de jornadas baseada em dados de conversas e comportamento dos usuários, refinando intenções do bot, reduzindo fallbacks e aumentando a resolutividade do autoatendimento.",
+            "Impacto Mensurável em Ensino Superior: **Redução de 20% no volume de transbordo** para atendimento humano e **aumento de 10% na retenção** de usuários na principal experiência conversacional de instituição brasileira de grande porte.",
+            "Concepção 0 to 1 em Farmácias de Grande Porte: Design e lançamento de solução conversacional para automação de atendimento, alcançando **redução de 60% no Tempo Médio de Atendimento (TMA de 5 para 2 minutos)**.",
+            "Governança & Previsibilidade de Entregas: Estruturação de novo framework de documentação e entrega de projetos de design, acelerando aprovação de fluxos junto a stakeholders e garantindo maior previsibilidade de resultados para os clientes.",
           ],
           tags: [
             "UX/UI Design",
+            "Design System",
             "UX Writing",
             "High-Fidelity UI",
-            "User Flows",
-            "Testes de Usabilidade",
-            "B2B Corporativo",
+            "Analytics & Curadoria",
+            "IBM Watson NLU",
+            "B2B SaaS",
           ],
         },
         {
           id: "amigu",
           company: "Instituto Amigu",
-          role: "UX/UI Designer Junior",
-          period: "2025",
-          badge: "Plataforma SouAmiGU",
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          badge: "Plataforma Web (SouAmiGU)",
           description: [
-            "Participação no desenvolvimento da plataforma SouAmiGU, voltada para organização e inscrição de hackathons.",
-            "Estruturação do fluxo de negócio, definição de regras de funcionamento, fluxos de usuário e jornadas digitais.",
-            "Desenvolvimento de protótipos de alta fidelidade utilizando Figma e colaboração na definição da experiência do usuário e arquitetura funcional da plataforma.",
+            "Concepção 0 to 1 de Plataforma Web (SouAmiGU): Atuação multidisciplinar na criação de ponta a ponta da plataforma web de gestão de hackathons, desenhando jornadas completas para participantes (inscrição, formação de equipes, submissão) e administradores (gestão de bancas, avaliação e métricas).",
+            "Discovery, Benchmarking & Arquitetura da Informação: Condução de pesquisas de requisitos e benchmarking no FigJam para estruturar a proposta de valor, regras de negócio e fluxos intuitivos de navegação.",
+            "Prototipação em Alta Fidelidade & Design System: Mapeamento de fluxos e prototipação de alta fidelidade navegável no Figma, além da criação do Design System do projeto para assegurar consistência visual e escalabilidade.",
+            "Resolução de Gargalos Operacionais & Viabilidade Técnica: Centralização do ecossistema de hackathons em um fluxo digital único (eliminando dispersão em planilhas e formulários), com protótipo final documentado em **ciclo de 4 meses** e validação prévia de viabilidade técnica com desenvolvedores.",
           ],
           tags: [
-            "UX/UI Design",
+            "Product Design (0 to 1)",
             "Figma",
             "Prototipagem",
-            "User Flows",
-            "Arquitetura Funcional",
+            "UX Research",
+            "Arquitetura da Informação",
             "Design System",
+          ],
+        },
+        {
+          id: "resolv-dev",
+          company: "Resolv.AI (Resolv Tecnologia e Inovação)",
+          role: "Assistente de Desenvolvimento de Software",
+          period: "07/2023 – 03/2024",
+          badge: "Chatbots & Low-code",
+          description: [
+            "Lógica de Negócio & Árvores de Decisão: Desenvolvimento e parametrização de fluxos conversacionais no IBM Watson Assistant e Zenvia Bots, estruturando árvores de decisão complexas com condicionais lógicas, variáveis de contexto, regex, entidades e intenções.",
+            "QA Técnico, Edge Cases & Integrações: Execução de testes de fluxo (QA), debugging e mapeamento de edge cases para assegurar estabilidade operacional e mitigar fallbacks; suporte em integrações via APIs/Webhooks em tempo real e manipulação de payloads JSON.",
+            "Ponte Técnica para Design & Promoção: Domínio prático sobre limitações e capacidades de NLU e backend que consolidou a base para desenhar soluções de UX/UI tecnicamente viáveis, resultando na promoção direta a UX Designer da empresa.",
+          ],
+          tags: [
+            "IBM Watson Assistant",
+            "Zenvia Bots",
+            "Lógica & Árvores de Decisão",
+            "QA & Debugging",
+            "APIs / Webhooks",
+            "Payloads JSON",
           ],
         },
         {
@@ -161,36 +314,14 @@ export const TRANSLATIONS = {
           period: "2023",
           badge: "Setor Portuário",
           description: [
-            "Atuação como mentor em hackathon focado em desafios do setor portuário, apoiando participantes na resolução de problemas e definição de soluções digitais.",
-            "Orientação em estruturação de ideias, tecnologia e experiência do usuário, com colaboração em dinâmicas multidisciplinares de inovação e desenvolvimento ágil.",
+            "Mentoria Técnica em Hackathon: Atuação como mentor em hackathon focado em desafios do setor portuário, orientando equipes multidisciplinares na definição de problemas, estruturação de propostas de valor, experiência do usuário (UX) e dinâmicas ágeis.",
           ],
           tags: [
-            "Mentoria",
+            "Mentoria Técnica",
             "Hackathon",
             "Design Thinking",
             "Inovação Aberta",
             "Desenvolvimento Ágil",
-          ],
-        },
-        {
-          id: "resolv-dev",
-          company: "Resolv Tecnologia e Inovação LTDA",
-          role: "Assistente de Desenvolvimento",
-          period: "2023 – 2024",
-          badge: "Chatbots & Low-code",
-          description: [
-            "Apoio no desenvolvimento e manutenção de chatbots utilizando plataformas low-code/no-code.",
-            "Participação na estruturação de melhorias e automações em soluções conversacionais.",
-            "Colaboração com equipes técnicas e de produto em iniciativas de experiência do usuário.",
-            "Suporte na implementação e evolução de fluxos digitais.",
-          ],
-          tags: [
-            "Chatbots",
-            "Low-code / No-code",
-            "Zenvia NLU",
-            "IBM Watson",
-            "Automação",
-            "UX Conversacional",
           ],
         },
       ],
@@ -253,9 +384,9 @@ export const TRANSLATIONS = {
       areasHeader: "Core Skills",
       skills: ["UX Design", "UI Design", "UX Research", "Chatbots", "Design System"],
       stats: [
-        { val: "2+", label: "Yrs Exp." },
-        { val: "3+", label: "Projects" },
-        { val: "3", label: "Companies" },
+        { val: "-60%", label: "Avg Handle Time" },
+        { val: "-20%", label: "Agent Handoff" },
+        { val: "+10%", label: "User Retention" },
       ],
     },
     projectsSection: {
@@ -266,22 +397,144 @@ export const TRANSLATIONS = {
       viewAllBehance: "View all projects on Behance",
       items: [
         {
+          id: "skoob",
           title: "Skoob Redesign",
+          subtitle: "Field Research, Qualitative Analysis & Asynchronous Book Club",
           description:
-            "UX Research study aiming to understand reader behavior and design the new reading communities feature for Skoob.",
-          tags: ["UX Research", "UX Design", "Communities"],
+            "UX Research and product design study transforming Skoob's social experience through asynchronous book club features.",
+          tags: ["UX Research", "UX Design", "Communities", "Figma"],
+          role: "UX Researcher & Product Designer",
+          period: "2024",
+          overview:
+            "In-depth UX research study examining avid reader behavior on Skoob. We discovered that while users register books on Skoob, social discussions bleed into WhatsApp, Instagram, and TikTok. Based on this friction, we designed an Asynchronous Book Club feature with chapter goals.",
+          challenge:
+            "Readers struggled with disorganized WhatsApp groups (where key messages got lost quickly) and rigid live scheduled meetings incompatible with busy routines. Skoob lacked structured, spoiler-free discussion spaces.",
+          solution:
+            "Qualitative research with remote video interviews (participants aged 24-45), Proto Personas, CSD Matrix, and Affinity Mapping in FigJam. We designed an Asynchronous Book Club experience with chapter goals and topic-focused discussion forums.",
+          methodology: [
+            "Semi-Structured Qualitative Interviews (Participants aged 24-45)",
+            "CSD Matrix (Certainties, Suppositions, Doubts)",
+            "Proto Personas, Proto Journeys & Empathy Map (Persona Mariana)",
+            "Affinity Mapping & Thematic Pain Point Analysis",
+            "User Journey Mapping & User Stories",
+          ],
+          insights: [
+            "Users open Skoob to record books, but leave the app to socialize on external platforms.",
+            "Discussions must be asynchronous by chapter, enabling deep exchanges without mandatory live calls.",
+            "Community experience is richer when prioritizing users' primary social circles of trust.",
+          ],
+          results: [
+            "Strategic Conclusion: Skoob's opportunity is transforming into an asynchronous trust-network connection platform.",
+            "Asynchronous Book Club architecture with chapter goals and spoiler alerts",
+            "End-to-end UX/UI flow & high-fidelity interactive prototype in Figma",
+            "Increased estimated retention and continuous reader engagement",
+          ],
+          behanceUrl: "https://www.behance.net/gallery/254848485/Redesign-Skoob",
+          hasModal: true,
         },
         {
-          title: "Forbi Pharmacies - Customer Journey (Under construction 🚧)",
+          id: "duolingo",
+          title: "Duolingo Onboarding Redesign",
+          subtitle: "Funnel Friction Analysis & Remote A/B Testing of Lean Onboarding",
+          description:
+            "UX Analytics research and lean redesign proposal reducing friction and accelerating first lesson completion on Duolingo.",
+          tags: ["UX Research", "UX Design", "Redesign", "Design System"],
+          role: "UX Analyst & Product Designer",
+          period: "October / 2026",
+          overview:
+            "UX Analytics and behavioral redesign study focused on optimizing Duolingo's onboarding funnel (from signup to first lesson completion). We analyzed baseline data across 8,000 synthetic users and conducted unmoderated remote testing on Maze comparing the current Android flow with our lean proposal.",
+          challenge:
+            "Only 50.2% of new users completed their first lesson. The largest funnel drop-off occurred during placement testing (29.2% loss). Android users experienced 2.2x more onboarding errors than iOS users (2.05 vs 0.94 errors) while encountering an upfront 3-screen registration wall.",
+          solution:
+            "Redesigned the onboarding flow in Figma, trimming total screens from 26 to 20. We removed 6 filler transition screens, added a 'Skip Placement' shortcut to jump straight into learning, and streamlined signup into 1 simple screen.",
+          methodology: [
+            "Funnel & Baseline Analytics on 8,000 User Dataset (Google Sheets)",
+            "Minimum Instrumentation Plan with 6 Tracked Telemetry Events",
+            "Cross-Device Friction Analysis (Android vs iOS)",
+            "Navigable Figma Prototypes (Control Version A vs Lean Proposal B)",
+            "Unmoderated Remote Usability Testing via Maze (50 participants / 22 paired-sample analysis)",
+            "Ethical AI Evaluation Framework via Humanifesto Scorecard",
+          ],
+          insights: [
+            "44% faster task completion: Median time to finish the first lesson dropped from 122s (Control A) to 68s (Proposal B).",
+            "24% chose to skip placement: Giving learners autonomy to skip placement tests immediately unblocks early retention.",
+            "Early signup friction: Demanding account registration upfront created drop-off; signup should happen after experiencing initial lesson value.",
+          ],
+          results: [
+            "Reduced median time-to-first-lesson by 44% (from 122s to 68s in Maze testing)",
+            "Streamlined total onboarding steps from 26 down to 20 screens in Figma",
+            "Pinpointed placement test friction (-29.2% drop) and validated shortcut autonomy",
+            "Delivered an impact vs. effort prioritized backlog and AI Scorecard for next iteration cycles",
+          ],
+          externalUrl: "https://ph-armada-nalis.github.io/case-duolingo-onboarding/",
+          externalUrlLabel: "Access Interactive Case Study",
+          hasModal: true,
+        },
+        {
+          id: "farmacias-forbi",
+          title: "Forbi Pharmacies",
+          subtitle: "Conversational Automation & 60% AHT Reduction",
           description:
             "Conversational flow for a major pharmacy chain to automate customer journeys and reduce average handle time.",
           tags: ["UX Design", "Chatbots", "Conversational Design"],
+          role: "UX/UI Designer & Conversational Designer",
+          period: "2024",
+          overview:
+            "Design and launch of a conversational customer service solution (WhatsApp & Webchat) for a large retail pharmacy chain.",
+          challenge:
+            "High volume of repetitive human agent support regarding inventory and orders, causing long queues and an average handle time of 5 minutes.",
+          solution:
+            "Conversational flow mapping in FigJam/Figma, tone-aligned UX Writing, and NLU integration via IBM Watson.",
+          results: [
+            "60% reduction in Average Handling Time (from 5 to 2 mins)",
+            "Automation of 70%+ frequent store inquiries",
+            "Optimized agent hand-off for complex cases",
+          ],
+          hasModal: false,
         },
         {
-          title: "AI Agent (Under construction 🚧)",
+          id: "agente-ia",
+          title: "Onboarding AI Agent",
+          subtitle: "UX Automation & Generative AI (AI First)",
           description:
             "AI Agent designed to assist new hires during the corporate employee onboarding process.",
-          tags: ["Generative AI", "UX Design", "Documentation"],
+          tags: ["Generative AI", "UX Design", "AI Agents"],
+          role: "UX Designer & Agent Developer",
+          period: "2025",
+          overview:
+            "Custom intelligent assistant for automating onboarding workflows and accelerating UX diagnostic tasks.",
+          challenge:
+            "Manual and fragmented employee onboarding consuming significant time from design and product leads.",
+          solution:
+            "AI Agent built with Gemini API integration, structured knowledge base, and interactive FAQ flows.",
+          results: [
+            "Awarded Best Documentation at Zenvia AI Hackathon",
+            "Accelerated ramp-up time for new team members",
+            "Expanded AI-first culture across squad",
+          ],
+          hasModal: false,
+        },
+        {
+          id: "souamigu",
+          title: "SouAmiGU Platform",
+          subtitle: "0 to 1 Web Platform for Hackathon Management",
+          description:
+            "End-to-end 0 to 1 web platform design to centralize hackathons, registrations, team formation, and jury evaluation.",
+          tags: ["Product Design", "Design System", "Web Platform"],
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          overview:
+            "End-to-end product design for Instituto Amigu's SouAmiGU web platform, unifying the entire social innovation event lifecycle.",
+          challenge:
+            "Hackathon operations fragmented across spreadsheets and forms, creating friction for participants, mentors, and judges.",
+          solution:
+            "Design System creation, high-fidelity interactive prototyping in Figma, and complete user journey mapping.",
+          results: [
+            "Delivered and documented in a 4-month cycle",
+            "Centralized 100% of registration, submission, and grading flows",
+            "Prior technical feasibility validation with engineering",
+          ],
+          hasModal: false,
         },
       ],
     },
@@ -295,72 +548,89 @@ export const TRANSLATIONS = {
         {
           id: "zenvia",
           company: "Zenvia Mobile Services",
-          role: "Mid-level UX Designer",
-          period: "2025 – 2026",
+          role: "User Experience Analyst",
+          period: "09/2025 – 07/2026",
           badge: "Insurance & GenAI",
           isCurrent: true,
           description: [
-            "Evolution of digital products and conversational journeys in collaboration with Product, Design, and Engineering teams for a major Insurance enterprise.",
-            "Definition and monitoring of product & experience metrics, leveraging behavioral data to drive product decisions and journey evolutions.",
-            "Structured analytics dashboards to support product decision-making and continuous user experience monitoring.",
-            "Conducted user behavior analysis to identify optimization opportunities and guide feature enhancements.",
-            "Contributed to AI agent design, defining conversational flows, decision logic, and interaction strategies powered by Generative AI.",
-            "Stakeholder alignment to define scalable digital solutions aligned with core business objectives.",
-            "Product innovation initiatives using Design Thinking, Scrum methodologies, and collaborative workshops.",
+            "Journey Design & Strategic AI: End-to-end conception and structuring of conversational journeys (WhatsApp and Webchat), from persona creation to dialogue flows and decision trees in Miro, integrating Generative AI (Gemini) as strategic UX support for a major Insurance enterprise.",
+            "Product Metrics & Continuous Improvement: Definition and standardization of experience metrics & KPIs using Zenvia NLU and generative AI tools (Gemini & Miro AI), mapping friction points, drop-off rates, and journey bottlenecks to guide product decisions and continuous optimization.",
+            "Specialized UX AI Agent: Development of a custom AI agent to automate squad UX routines, accelerating discovery phases, rapid friction diagnosis in conversational flows, and automated performance indicator generation.",
+            "Hackathon Highlight & AI-First Initiative: Recognized for Best Documentation in an internal AI agents hackathon, driving team results and acting as a multiplier in implementing Zenvia's corporate AI-First strategy.",
           ],
           tags: [
             "Product Design",
             "UX Research",
-            "Product Metrics",
-            "Dashboards",
-            "Generative AI",
-            "AI Agents",
+            "Generative AI (Gemini)",
+            "Metrics & KPIs",
             "Conversational Design",
-            "Scrum",
+            "AI Agents",
+            "Zenvia NLU",
           ],
         },
         {
           id: "resolv-jr",
-          company: "Resolv Tecnologia e Inovação LTDA",
-          role: "Junior UX/UI Designer",
-          period: "2024 – 2025",
-          badge: "Health & Edu B2B",
+          company: "Resolv.AI (Resolv Tecnologia e Inovação)",
+          role: "UX/UI Designer",
+          period: "06/2024 – 06/2025",
+          badge: "Health & Education B2B",
           description: [
-            "Continuous evolution of scalable B2B digital products for corporate clients in Healthcare and Education sectors alongside key stakeholders.",
-            "High-fidelity UI design and interactive prototyping.",
-            "Digital journey structuring applying UX Writing to enhance interaction clarity and eliminate UX ambiguity.",
-            "User flow definition and information architecture.",
-            "Usability testing design and execution to identify friction points and derive actionable product insights.",
-            "Behavioral analytics for data-driven product improvement.",
-            "Active cross-functional collaboration between Product, Design, and Development.",
+            "UI Design & Design System: High-fidelity interface design and interactive prototyping in Figma for B2B platforms (Healthcare and Education), implementing modular components, variants, Auto Layout, and detailed technical handoffs for engineering teams.",
+            "Conversational Journeys & UX Writing: Design of complete conversational journeys (WhatsApp and Webchat) in FigJam/Figma, conducting flow mapping, decision trees, and brand-aligned UX Writing, integrating NLP/NLU flows via IBM Watson.",
+            "Data-Driven Curation: Leadership of analytical journey curation routines based on conversation data and user behavior, refining bot intents, reducing fallbacks, and increasing self-service resolution.",
+            "Measurable Impact in Higher Education: 20% reduction in human support handoff volume and 10% increase in user retention for a major Brazilian educational institution's core conversational experience.",
+            "0 to 1 Product Design in Pharmacy Retail: Design and launch of a conversational customer support automation solution, achieving a 60% reduction in Average Handle Time (AHT reduced from 5 to 2 minutes).",
+            "Governance & Delivery Predictability: Structuring a new design project documentation and handoff framework, accelerating stakeholder approvals and ensuring greater delivery predictability.",
           ],
           tags: [
             "UX/UI Design",
+            "Design System",
             "UX Writing",
             "High-Fidelity UI",
-            "User Flows",
-            "Usability Testing",
+            "Analytics & Curation",
+            "IBM Watson NLU",
             "B2B SaaS",
           ],
         },
         {
           id: "amigu",
           company: "Instituto Amigu",
-          role: "Junior UX/UI Designer",
-          period: "2025",
-          badge: "SouAmiGU Platform",
+          role: "Product Designer",
+          period: "12/2024 – 03/2025",
+          badge: "Web Platform (SouAmiGU)",
           description: [
-            "Participated in building the SouAmiGU platform for hackathon organization and registration.",
-            "Structured business logic, operational rules, user flows, and digital journeys.",
-            "Developed high-fidelity Figma prototypes and collaborated on UX definition and platform functional architecture.",
+            "0 to 1 Web Platform Conception (SouAmiGU): End-to-end creation of a web-based hackathon management platform, designing comprehensive journeys for participants (registration, team formation, submission) and administrators (judging panels, evaluation, analytics).",
+            "Discovery, Benchmarking & Information Architecture: Requirement research and benchmarking in FigJam to structure core value propositions, business rules, and intuitive navigation flows.",
+            "High-Fidelity Prototyping & Design System: Flow mapping and interactive high-fidelity prototyping in Figma, plus creating the project's Design System to ensure visual consistency and scalability.",
+            "Operational Bottleneck Resolution & Technical Feasibility: Centralizing the hackathon ecosystem into a unified digital workflow (eliminating spreadsheet fragmentation), delivering a documented prototype in a 4-month cycle with engineering feasibility validation.",
           ],
           tags: [
-            "UX/UI Design",
+            "Product Design (0 to 1)",
             "Figma",
             "Prototyping",
-            "User Flows",
-            "Functional Architecture",
+            "UX Research",
+            "Information Architecture",
             "Design System",
+          ],
+        },
+        {
+          id: "resolv-dev",
+          company: "Resolv.AI (Resolv Tecnologia e Inovação)",
+          role: "Software Development Assistant",
+          period: "07/2023 – 03/2024",
+          badge: "Chatbots & Low-code",
+          description: [
+            "Business Logic & Decision Trees: Parameterization and development of conversational flows in IBM Watson Assistant and Zenvia Bots, building complex decision trees with logical conditionals, context variables, regex, entities, and intents.",
+            "Technical QA, Edge Cases & API Integrations: Flow testing (QA), debugging, and edge-case mapping to ensure operational stability and minimize fallbacks; supporting real-time API/Webhook integrations and JSON payload manipulation.",
+            "Technical Bridge for Design & Promotion: Hands-on expertise with NLU and backend constraints that built the foundation to design technically feasible UX/UI solutions, resulting in direct promotion to UX Designer.",
+          ],
+          tags: [
+            "IBM Watson Assistant",
+            "Zenvia Bots",
+            "Logic & Decision Trees",
+            "QA & Debugging",
+            "APIs / Webhooks",
+            "JSON Payloads",
           ],
         },
         {
@@ -370,37 +640,14 @@ export const TRANSLATIONS = {
           period: "2023",
           badge: "Port Sector",
           description: [
-            "Mentored teams at a hackathon focused on innovation challenges in the port and logistics sector.",
-            "Technical guidance in problem-solving, product validation, technology stack, and user experience.",
-            "Guided teams in pitch structuring, rapid prototyping, and agile innovation dynamics.",
+            "Technical Mentorship in Hackathon: Mentored multidisciplinary teams in a port sector innovation hackathon, guiding problem definition, value proposition structuring, user experience (UX), and agile team dynamics.",
           ],
           tags: [
-            "Mentorship",
+            "Technical Mentorship",
             "Hackathon",
             "Design Thinking",
             "Open Innovation",
             "Agile",
-          ],
-        },
-        {
-          id: "resolv-dev",
-          company: "Resolv Tecnologia e Inovação LTDA",
-          role: "Development Assistant",
-          period: "2023 – 2024",
-          badge: "Chatbots & Low-code",
-          description: [
-            "Development and maintenance support for chatbots built on low-code/no-code platforms.",
-            "Structuring automation improvements and conversational flows.",
-            "Collaboration with engineering and product teams on user experience initiatives.",
-            "Support in digital flow implementation and continuous deployment.",
-          ],
-          tags: [
-            "Chatbots",
-            "Low-code / No-code",
-            "Zenvia NLU",
-            "IBM Watson",
-            "Automation",
-            "Conversational UX",
           ],
         },
       ],

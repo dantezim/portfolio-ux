@@ -116,7 +116,21 @@ export default function Timeline({ lang }: TimelineProps) {
                     {exp.description.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-[#d0d7de] text-sm md:text-[15px] leading-relaxed">
                         <CheckCircle2 size={16} className="text-[#5b68f5] shrink-0 mt-1" />
-                        <span>{item}</span>
+                        <span>
+                          {item.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {
+                            if (part.startsWith("**") && part.endsWith("**")) {
+                              return (
+                                <strong
+                                  key={pIdx}
+                                  className="font-semibold text-[#a4b1ff] bg-[#5b68f5]/15 border border-[#5b68f5]/30 px-1.5 py-0.5 rounded text-xs md:text-sm"
+                                >
+                                  {part.slice(2, -2)}
+                                </strong>
+                              );
+                            }
+                            return part;
+                          })}
+                        </span>
                       </li>
                     ))}
                   </ul>

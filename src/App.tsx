@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { Download, ArrowUp } from "lucide-react";
+import { Download, ArrowUp, Sparkles } from "lucide-react";
 import imgProfile from "./imports/Frame1/9e02335baa9e73c98c7949947f1cfe368040d3d1.png";
 import imgSkoob from "./assets/skoob-cover.png";
+import imgDuolingo from "./assets/duolingo-cover.png";
 import SplashScreen from "./SplashScreen";
 import Timeline from "./Timeline";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { TRANSLATIONS, type Language } from "./i18n/translations";
+import ProjectModal from "./ProjectModal";
+import AllProjectsModal from "./AllProjectsModal";
+import { TRANSLATIONS, type Language, type ProjectTranslation } from "./i18n/translations";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/pedro-henrique-armada-nalis-147136266/";
 const BEHANCE_URL = "https://www.behance.net/pedroharmada";
@@ -221,9 +224,14 @@ function ProfileCard({ lang }: SectionProps) {
 
       <div className="border-t border-white/10 mt-4 pt-4 grid grid-cols-3 gap-2 text-center">
         {tCard.stats.map(({ val, label }) => (
-          <div key={label}>
-            <p className="text-white font-bold text-lg leading-tight">{val}</p>
-            <p className="text-white/50 text-xs">{label}</p>
+          <div
+            key={label}
+            className="bg-white/[0.04] border border-white/10 rounded-xl py-2 px-1 hover:bg-white/[0.08] hover:border-white/20 transition-all"
+          >
+            <p className="text-xl lg:text-2xl font-black text-[#5b68f5] leading-tight">
+              {val}
+            </p>
+            <p className="text-white/80 text-[11px] font-medium mt-0.5 leading-snug">{label}</p>
           </div>
         ))}
       </div>
@@ -232,19 +240,43 @@ function ProfileCard({ lang }: SectionProps) {
 }
 
 function ProjectsSection({ lang }: SectionProps) {
+  const [activeProject, setActiveProject] = useState<ProjectTranslation | null>(null);
+  const [activeImage, setActiveImage] = useState<string | undefined>(undefined);
+  const [activeColor, setActiveColor] = useState<string | undefined>(undefined);
+  const [isAllProjectsOpen, setIsAllProjectsOpen] = useState(false);
+
   const tProjects = TRANSLATIONS[lang].projectsSection;
 
-  const projectImages = [imgSkoob, undefined, undefined];
-  const projectLinks = [
-    "https://www.behance.net/gallery/254848485/Redesign-Skoob",
-    BEHANCE_URL,
-    BEHANCE_URL,
-  ];
+  useEffect(() => {
+    if (activeProject || isAllProjectsOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeProject, isAllProjectsOpen]);
+
+  const projectImages: (string | undefined)[] = [imgSkoob, imgDuolingo, undefined, undefined, undefined];
   const projectColors = [
     "from-[#5b68f5] to-[#2b49aa]",
+    "from-[#58cc02] to-[#2b49aa]",
     "from-[#6822c9] to-[#2b49aa]",
     "from-[#2b49aa] to-[#151e87]",
+    "from-[#10783b] to-[#2b49aa]",
   ];
+
+  const handleOpenProjectModal = (p: ProjectTranslation, image?: string, color?: string) => {
+    if (p.hasModal !== false) {
+      setActiveProject(p);
+      setActiveImage(image);
+      setActiveColor(color);
+    }
+  };
+
+  const featuredProjects = tProjects.items.slice(0, 3);
+  const isPt = lang === "pt";
 
   return (
     <section id="projetos" className="py-20 px-6 lg:px-16 bg-white/60">
@@ -266,31 +298,36 @@ function ProjectsSection({ lang }: SectionProps) {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tProjects.items.map((p, idx) => {
+        {/* Home Page Featured 3 Projects (Frame 4) */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {featuredProjects.map((p, idx) => {
             const image = projectImages[idx];
-            const targetLink = projectLinks[idx] || BEHANCE_URL;
-            const color = projectColors[idx];
+            const color = projectColors[idx % projectColors.length];
+            const canOpenModal = p.hasModal !== false;
 
             return (
               <article
-                key={p.title}
-                className="group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                key={p.id || p.title}
+                onClick={() => handleOpenProjectModal(p, image, color)}
+                className={`group bg-white rounded-2xl border border-[#e2e4f0] overflow-hidden transition-all duration-300 flex flex-col ${
+                  canOpenModal
+                    ? "hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                    : "opacity-95"
+                }`}
               >
-                <a
-                  href={targetLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative h-48 overflow-hidden bg-gray-100"
-                >
+                <div className="block relative h-48 overflow-hidden bg-gray-100">
                   {image ? (
                     <img
                       src={image}
                       alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
+                        canOpenModal ? "group-hover:scale-105" : ""
+                      }`}
                     />
                   ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${color}`} />
+                    <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center`}>
+                      <Sparkles className="w-12 h-12 text-white/30" />
+                    </div>
                   )}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
                     {p.tags.map((t) => (
@@ -302,46 +339,73 @@ function ProjectsSection({ lang }: SectionProps) {
                       </span>
                     ))}
                   </div>
-                </a>
+                </div>
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-[#1c1b1b] text-lg mb-2 leading-snug">
-                      <a
-                        href={targetLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#5b68f5] transition-colors"
-                      >
-                        {p.title}
-                      </a>
+                    <h3
+                      className={`font-bold text-[#1c1b1b] text-lg mb-2 leading-snug ${
+                        canOpenModal ? "group-hover:text-[#5b68f5] transition-colors" : ""
+                      }`}
+                    >
+                      {p.title}
                     </h3>
-                    <p className="text-[#494a4c] text-sm leading-relaxed mb-5">{p.description}</p>
+                    <p className="text-[#494a4c] text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
                   </div>
-                  <a
-                    href={targetLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto"
-                  >
-                    {tProjects.viewCaseStudy}
-                  </a>
+
+                  {canOpenModal ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenProjectModal(p, image, color);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-[#2b49aa] font-semibold text-sm hover:gap-2.5 transition-all mt-auto self-start cursor-pointer"
+                    >
+                      {tProjects.viewCaseStudy}
+                    </button>
+                  ) : (
+                    <span className="inline-block text-xs font-semibold text-[#94a3b8] bg-[#f1f5f9] px-2.5 py-1 rounded-md mt-auto self-start">
+                      {isPt ? "Em breve 🚧" : "Coming soon 🚧"}
+                    </span>
+                  )}
                 </div>
               </article>
             );
           })}
         </div>
 
-        <div className="text-center mt-10">
-          <a
-            href={BEHANCE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="brand-gradient inline-block text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px]"
+        {/* 'Ver todos os projetos' CTA Button (Frame 4) */}
+        <div className="text-center mt-12 flex justify-center">
+          <button
+            onClick={() => setIsAllProjectsOpen(true)}
+            className="brand-gradient text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px] cursor-pointer"
           >
-            {tProjects.viewAllBehance}
-          </a>
+            {isPt ? "Ver todos os projetos" : "View all projects"}
+          </button>
         </div>
       </div>
+
+      {/* Case Study Modal (Skoob / Duolingo) */}
+      <ProjectModal
+        project={activeProject}
+        image={activeImage}
+        gradientColor={activeColor}
+        lang={lang}
+        onClose={() => setActiveProject(null)}
+      />
+
+      {/* Frame 5: All Projects Grid Modal */}
+      <AllProjectsModal
+        isOpen={isAllProjectsOpen}
+        projects={tProjects.items}
+        projectImages={projectImages}
+        projectColors={projectColors}
+        lang={lang}
+        onClose={() => setIsAllProjectsOpen(false)}
+        onSelectProject={(p, image, color) => {
+          handleOpenProjectModal(p, image, color);
+        }}
+      />
     </section>
   );
 }
