@@ -375,21 +375,13 @@ function ProjectsSection({ lang }: SectionProps) {
         </div>
 
         {/* 'Ver todos os projetos' CTA Button (Frame 4) */}
-        <div className="text-center mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="text-center mt-12 flex justify-center">
           <button
             onClick={() => setIsAllProjectsOpen(true)}
             className="brand-gradient text-white font-bold px-10 py-3.5 rounded-2xl hover:opacity-90 transition-all shadow-lg shadow-[#5b68f5]/30 text-[15px] cursor-pointer"
           >
             {isPt ? "Ver todos os projetos" : "View all projects"}
           </button>
-          <a
-            href={BEHANCE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-2 border-[#5b68f5] text-[#2b49aa] font-bold px-8 py-3 rounded-2xl hover:bg-[#5b68f5]/5 transition-all text-sm"
-          >
-            {tProjects.viewAllBehance}
-          </a>
         </div>
       </div>
 
